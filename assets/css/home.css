@@ -5,16 +5,38 @@
 
 .hero{
   position:relative; min-height:88vh; display:flex; align-items:flex-end; justify-content:center;
+  overflow:hidden; padding-bottom:3vh;
+  background-color:#a98670; /* respaldo/"letterbox" en pantallas ultra anchas, tono tomado de la propia foto */
+}
+/* la foto tiene el texto "horneado" en el archivo — un ancho tope evita que en pantallas
+   muy anchas y bajas el recorte vertical del background-size:cover empuje ese texto
+   contra los botones. Fuera de ese ancho tope, se ve el color de respaldo de arriba. */
+.hero-bg{
+  position:absolute; inset:0; margin:0 auto; max-width:1700px;
   background-image:url('../img/hero.jpeg'); background-size:cover; background-position:50% 22%; background-repeat:no-repeat;
-  overflow:hidden; padding-bottom:8vh;
 }
 .hero::after{
   content:''; position:absolute; inset:0; pointer-events:none;
   background:linear-gradient(to bottom, rgba(20,16,10,0) 42%, rgba(18,14,9,.4) 78%, rgba(15,12,8,.6) 100%);
 }
 .hero-ctas{ position:relative; z-index:2; display:flex; gap:16px; flex-wrap:wrap; justify-content:center; }
+.hero-mobile-copy{ display:none; }
+
+/* En mobile, la franja "cover" recorta el ancho de la foto tanto que el texto horneado
+   en la imagen queda cortado (el título no entra). En vez de perseguir un recorte que
+   nunca calza en todos los anchos, mostramos una copia real en HTML (con la tipografía
+   del sitio) y usamos la foto solo como fondo atmosférico, sin depender de su texto. */
 @media (max-width:560px){
-  .hero{ min-height:78vh; background-position:62% 18%; padding-bottom:6vh; }
+  .hero{ min-height:90vh; padding-bottom:8vh; }
+  .hero::after{ background:linear-gradient(180deg, rgba(20,16,10,.24) 0%, rgba(18,14,9,.3) 45%, rgba(15,12,8,.72) 100%); }
+  .hero-bg{ background-position:100% 58%; }
+  .hero-mobile-copy{ display:block; position:relative; z-index:2; text-align:center; max-width:340px; margin:0 auto 22px; }
+  .hero-mobile-copy .eyebrow{ color:rgba(255,255,255,.85); }
+  .hero-mobile-copy .eyebrow::before{ display:none; }
+  .hmc-title{
+    font-weight:800; font-size:1.7rem; line-height:1.25; color:#fff; margin:.35em 0 0;
+    text-shadow:0 2px 14px rgba(0,0,0,.35);
+  }
   .hero-ctas{ flex-direction:column; width:100%; padding:0 20px; }
 }
 
