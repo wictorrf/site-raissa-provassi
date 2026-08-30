@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tus datos de entrega · Priori</title>
+<meta name="description" content="Completá tus datos de entrega para cerrar tu pedido de Priori por WhatsApp.">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/configurator.css">
+</head>
+<body data-page="entrega">
+
+<div id="site-nav"></div>
+
+<div class="flow-page" id="deliveryPage" style="display:none;">
+  <div class="container">
+    <a class="flow-back" href="#" id="deliveryBack">← Volver y editar</a>
+    <div class="flow-steps">
+      <div class="flow-step done"><span class="dot">✓</span> Personalizar</div>
+      <div class="flow-sep"></div>
+      <div class="flow-step now"><span class="dot">2</span> Tus datos</div>
+      <div class="flow-sep"></div>
+      <div class="flow-step"><span class="dot">3</span> Enviar por WhatsApp</div>
+    </div>
+    <div class="flow-head">
+      <h1>Ya casi: tus datos de entrega</h1>
+      <p>Repasá el pedido y completá tus datos. El envío es por WhatsApp, sin pago ahora.</p>
+    </div>
+
+    <form class="delivery-grid" id="deliveryForm" novalidate>
+      <div class="form-card">
+        <p class="form-eyebrow">Datos de entrega</p>
+        <div class="form-grid">
+          <div class="field full"><label>Nombre completo <span class="req">*</span></label><input type="text" id="fName" required></div>
+          <div class="field full"><label>WhatsApp (con código de área) <span class="req">*</span></label><input type="tel" id="fPhone" placeholder="+54 9 11 0000-0000" required></div>
+          <div class="field"><label>Código postal <span class="req">*</span></label><input type="text" id="fCP" required></div>
+          <div class="field"><label>Calle / Avenida <span class="req">*</span></label><input type="text" id="fStreet" required></div>
+          <div class="field"><label>Número <span class="req">*</span></label><input type="text" id="fNumber" required></div>
+          <div class="field"><label>Piso / Depto</label><input type="text" id="fApt"></div>
+          <div class="field"><label>Barrio <span class="req">*</span></label><input type="text" id="fNeighborhood" required></div>
+          <div class="field"><label>Ciudad <span class="req">*</span></label><input type="text" id="fCity" required></div>
+          <div class="field"><label>Provincia <span class="req">*</span></label><input type="text" id="fProvince" required></div>
+          <div class="field full"><label>Notas</label><textarea id="fNotes" placeholder="¿Algún detalle del pedido o de la entrega?"></textarea></div>
+        </div>
+      </div>
+
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <p class="sidebar-title">Tu pedido</p>
+          <div id="deliverySummary"></div>
+          <div class="sum-total"><span class="k">Total</span><span class="v" id="deliveryTotal">$0</span></div>
+          <button type="submit" class="btn btn-wpp btn-block" id="sendWhatsAppBtn">💬 Enviar pedido por WhatsApp</button>
+          <p class="form-submit-note">Abrimos WhatsApp con todo completado, solo tenés que enviarlo.</p>
+        </div>
+      </aside>
+    </form>
+  </div>
+</div>
+
+<div class="flow-page empty-state" id="emptyState" style="display:none;">
+  <div class="container">
+    <p>Todavía no armaste un pedido.</p>
+    <a class="btn btn-couro" href="index.html">Volver al inicio</a>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/order.js"></script>
+<script src="assets/js/chrome.js"></script>
+<script src="assets/js/entrega.js"></script>
+</body>
+</html>

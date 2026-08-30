@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elegí tu Priori · Colección lista</title>
+<meta name="description" content="Modelos Priori ya armados de punta a punta. Elegí el que te representa y nosotros hacemos el resto.">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/configurator.css">
+</head>
+<body data-page="coleccion">
+
+<div id="site-nav"></div>
+
+<div class="flow-page">
+  <div class="container">
+    <a class="flow-back" href="index.html">← Volver al inicio</a>
+    <div class="flow-steps">
+      <div class="flow-step now"><span class="dot">1</span> Elegir</div>
+      <div class="flow-sep"></div>
+      <div class="flow-step"><span class="dot">2</span> Tus datos</div>
+      <div class="flow-sep"></div>
+      <div class="flow-step"><span class="dot">3</span> Enviar por WhatsApp</div>
+    </div>
+    <div class="flow-head">
+      <h1>Elegí tu Priori</h1>
+      <p>Modelos ya armados de punta a punta. Elegís el que te representa y nosotros hacemos el resto.</p>
+    </div>
+
+    <div class="configurator">
+      <div class="steps">
+
+        <div class="step-card">
+          <div class="step-head"><div class="step-head-left"><span class="step-num">1</span><h3>El modelo</h3></div></div>
+          <div class="preset-grid" id="presetGrid"></div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-head"><div class="step-head-left"><span class="step-num">2</span><h3>Tamaño</h3></div></div>
+          <div class="option-grid" id="collSizeGrid"></div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-head">
+            <div class="step-head-left"><span class="step-num">3</span><h3>Pauta de los 3 cuadernos</h3></div>
+            <span class="step-note">impresa +<span id="collPautaHint"></span></span>
+          </div>
+          <p class="step-sub">La misma pauta se aplica a los 3 cuadernos.</p>
+          <div class="pauta-row" id="collPautaRow"></div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-head"><div class="step-head-left"><span class="step-num">4</span><h3>Sumá algo más</h3></div><span class="step-note">opcional</span></div>
+          <div id="collAddonsWrap"></div>
+        </div>
+
+      </div>
+
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <div class="preview-tabs" id="collPreviewTabs">
+            <button type="button" class="preview-tab active" data-side="fuera">Por fuera</button>
+            <button type="button" class="preview-tab" data-side="dentro">Por dentro</button>
+          </div>
+          <div class="sidebar-preview" id="collPreviewBox"></div>
+          <p class="sidebar-title">Tu journal</p>
+          <div id="collSummary"></div>
+          <div class="sum-total"><span class="k">Total</span><span class="v" id="collTotal">$0</span></div>
+          <button class="btn btn-couro btn-block" id="collContinueBtn">Continuar con mi pedido →</button>
+          <p class="sidebar-note">Siguiente paso: tus datos de entrega y el envío por WhatsApp.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<div class="mobile-order-bar" id="mobileOrderBar">
+  <div class="moa-total"><span class="lbl">Total</span><span class="val" id="collTotalMobile">$0</span></div>
+  <button class="btn btn-couro" id="collContinueBtnMobile">Continuar →</button>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/preview.js"></script>
+<script src="assets/js/addons.js"></script>
+<script src="assets/js/order.js"></script>
+<script src="assets/js/chrome.js"></script>
+<script src="assets/js/coleccion.js"></script>
+</body>
+</html>

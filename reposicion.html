@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reposición de cuadernos · Priori</title>
+<meta name="description" content="Comprá solo el juego de 3 cuadernos de repuesto para tu Priori. La tapa de cuero es para toda la vida.">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/configurator.css">
+</head>
+<body data-page="reposicion">
+
+<div id="site-nav"></div>
+
+<div class="flow-page">
+  <div class="container">
+    <a class="flow-back" href="index.html">← Volver al inicio</a>
+    <div class="flow-steps">
+      <div class="flow-step now"><span class="dot">1</span> Elegir</div>
+      <div class="flow-sep"></div>
+      <div class="flow-step"><span class="dot">2</span> Tus datos</div>
+      <div class="flow-sep"></div>
+      <div class="flow-step"><span class="dot">3</span> Enviar por WhatsApp</div>
+    </div>
+    <div class="flow-head">
+      <h1>Reposición de cuadernos</h1>
+      <p>La tapa de cuero es para toda la vida. Cuando se termina el papel, comprá solo el juego de 3 cuadernos.</p>
+    </div>
+
+    <div class="configurator">
+      <div class="steps">
+
+        <div class="step-card">
+          <div class="step-head"><div class="step-head-left"><span class="step-num">1</span><h3>Color de los 3 cuadernos</h3></div></div>
+          <div class="swatch-row" id="refillCoverGrid"></div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-head"><div class="step-head-left"><span class="step-num">2</span><h3>Pauta de los 3 cuadernos</h3></div></div>
+          <div class="pauta-row" id="refillPautaRow"></div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-head"><div class="step-head-left"><span class="step-num">·</span><h3>Cadernetas especiales</h3></div></div>
+          <p class="step-sub" style="margin-bottom:0;">Trios con capa de arte de colecciones temáticas. <strong>Próximamente.</strong></p>
+        </div>
+
+      </div>
+
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <div class="sidebar-preview" id="refillPreviewBox"></div>
+          <p class="sidebar-title">Tu reposición</p>
+          <div id="refillSummary"></div>
+          <div class="sum-total"><span class="k">Total</span><span class="v" id="refillTotal">$0</span></div>
+          <button class="btn btn-couro btn-block" id="refillContinueBtn">Continuar con mi pedido →</button>
+          <p class="sidebar-note">Siguiente paso: tus datos de entrega y el envío por WhatsApp.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<div class="mobile-order-bar" id="mobileOrderBar">
+  <div class="moa-total"><span class="lbl">Total</span><span class="val" id="refillTotalMobile">$0</span></div>
+  <button class="btn btn-couro" id="refillContinueBtnMobile">Continuar →</button>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/preview.js"></script>
+<script src="assets/js/order.js"></script>
+<script src="assets/js/chrome.js"></script>
+<script src="assets/js/reposicion.js"></script>
+</body>
+</html>

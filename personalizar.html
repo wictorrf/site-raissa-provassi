@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Armá tu Priori · Personalizado</title>
+<meta name="description" content="Personalizá tu journal Priori desde cero: tamaño, color de cuero, elástico, pauta de cada cuaderno, grabado y dijes.">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+<link rel="stylesheet" href="assets/css/configurator.css">
+</head>
+<body data-page="personalizar">
+
+<div id="site-nav"></div>
+
+<div class="flow-page">
+  <div class="container">
+    <a class="flow-back" href="index.html">← Volver al inicio</a>
+    <div class="flow-steps">
+      <div class="flow-step now"><span class="dot">1</span> Personalizar</div>
+      <div class="flow-sep"></div>
+      <div class="flow-step"><span class="dot">2</span> Tus datos</div>
+      <div class="flow-sep"></div>
+      <div class="flow-step"><span class="dot">3</span> Enviar por WhatsApp</div>
+    </div>
+    <div class="flow-head">
+      <h1>Armá tu Priori</h1>
+      <p>Cada elección le da forma a tu journal, acá mismo, en tiempo real.</p>
+    </div>
+
+    <div class="configurator">
+      <div class="steps">
+
+        <div class="step-card">
+          <div class="step-head"><div class="step-head-left"><span class="step-num">1</span><h3>Tamaño</h3></div></div>
+          <div class="option-grid" id="custSizeGrid"></div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-head"><div class="step-head-left"><span class="step-num">2</span><h3>Color del cuero</h3></div></div>
+          <div class="swatch-row" id="leatherGrid"></div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-head"><div class="step-head-left"><span class="step-num">3</span><h3>Color del elástico</h3></div></div>
+          <div class="swatch-row" id="elasticGrid"></div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-head">
+            <div class="step-head-left"><span class="step-num">4</span><h3>Los 3 cuadernos</h3></div>
+            <span class="step-note">pauta impresa +<span id="custPautaHint"></span>/cuaderno</span>
+          </div>
+          <div id="notebooksWrap"></div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-head">
+            <div class="step-head-left"><span class="step-num">5</span><h3>Grabado</h3></div>
+            <span class="step-note">+<span id="engravePriceHint"></span></span>
+          </div>
+          <div class="toggle-row">
+            <span>Grabar tu nombre o iniciales en la tapa</span>
+            <div class="toggle" id="engraveToggle"></div>
+          </div>
+          <div class="engrave-input" id="engraveInputWrap">
+            <input type="text" id="engraveText" maxlength="18" placeholder="Ej: Valentina, o V.R.">
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-head">
+            <div class="step-head-left"><span class="step-num">6</span><h3>Dijes</h3></div>
+            <span class="step-note">desde <span id="charmPriceHint"></span></span>
+          </div>
+          <p class="step-sub">Sumá los que quieras a la tapa o al elástico.</p>
+          <div class="chip-grid" id="charmGrid"></div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-head"><div class="step-head-left"><span class="step-num">7</span><h3>Detalles extra</h3></div></div>
+          <div class="chip-grid" id="accessoryGrid"></div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-head"><div class="step-head-left"><span class="step-num">8</span><h3>Sumá algo más</h3></div><span class="step-note">opcional</span></div>
+          <div id="custAddonsWrap"></div>
+        </div>
+
+      </div>
+
+      <aside class="sidebar">
+        <div class="sidebar-card">
+          <div class="preview-tabs" id="custPreviewTabs">
+            <button type="button" class="preview-tab active" data-side="fuera">Por fuera</button>
+            <button type="button" class="preview-tab" data-side="dentro">Por dentro</button>
+          </div>
+          <div class="sidebar-preview" id="custPreviewBox"></div>
+          <p class="sidebar-title">Tu journal</p>
+          <div id="custSummary"></div>
+          <div class="sum-total"><span class="k">Total</span><span class="v" id="custTotal">$0</span></div>
+          <button class="btn btn-couro btn-block" id="custContinueBtn">Continuar con mi pedido →</button>
+          <p class="sidebar-note">Siguiente paso: tus datos de entrega y el envío por WhatsApp.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<div class="mobile-order-bar" id="mobileOrderBar">
+  <div class="moa-total"><span class="lbl">Total</span><span class="val" id="custTotalMobile">$0</span></div>
+  <button class="btn btn-couro" id="custContinueBtnMobile">Continuar →</button>
+</div>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/preview.js"></script>
+<script src="assets/js/addons.js"></script>
+<script src="assets/js/order.js"></script>
+<script src="assets/js/chrome.js"></script>
+<script src="assets/js/personalizar.js"></script>
+</body>
+</html>

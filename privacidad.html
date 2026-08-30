@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de privacidad · Priori</title>
+<meta name="description" content="Cómo Priori usa los datos que completás para coordinar tu pedido.">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/layout.css">
+</head>
+<body data-page="privacidad">
+
+<div id="site-nav"></div>
+
+<main class="pr-doc">
+  <p class="eyebrow">Políticas</p>
+  <h1>Política de privacidad</h1>
+  <p class="upd">Nota interna: este texto describe únicamente los datos que el sitio recolecta hoy. Antes de publicar, pedile a Raissa que lo revise (o a un asesor legal si lo prefiere).</p>
+
+  <article>
+    <h2>Qué datos pedimos</h2>
+    <p>Cuando completás el formulario de entrega para cerrar un pedido, te pedimos: nombre completo, número de WhatsApp, dirección (calle, número, piso/depto, barrio, ciudad, provincia y código postal) y, opcionalmente, alguna nota sobre el pedido.</p>
+
+    <h2>Para qué los usamos</h2>
+    <p>Esos datos se usan únicamente para armar el mensaje de WhatsApp con el que coordinamos tu pedido: confirmar los detalles, la forma de pago y organizar la entrega. No los guardamos en ningún servidor propio: el mensaje se arma en tu navegador y se envía directo a nuestro WhatsApp.</p>
+
+    <h2>Qué no hacemos</h2>
+    <ul>
+      <li>No pedimos ni guardamos datos de tarjetas ni información de pago en el sitio.</li>
+      <li>No compartimos tus datos con terceros.</li>
+      <li>No creamos ninguna cuenta ni usuario: no hace falta registrarte para comprar.</li>
+    </ul>
+
+    <h2>Contacto</h2>
+    <p>Si tenés alguna duda sobre tus datos, escribinos por <a href="#" id="privWppLink">WhatsApp</a>.</p>
+  </article>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/chrome.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("privWppLink").href = "https://wa.me/" + WHATSAPP_NUMBER;
+});
+</script>
+</body>
+</html>
