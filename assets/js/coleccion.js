@@ -70,7 +70,7 @@
       const notebooks = DEFAULT_INTERIOR_NOTEBOOKS.map(cover => ({ cover, pauta: c.pauta }));
       box.innerHTML = buildInteriorSVG(notebooks);
     } else {
-      box.innerHTML = buildExteriorSVG({ coverHex: lc.hex, elasticHex: ec.hex, engraveOn: false, engraveText: "", charmIds: [] });
+      box.innerHTML = buildExteriorSVG({ coverHex: lc.hex, elasticHex: ec.hex, engraveOn: false, engraveText: "", charmIds: [], size: c.size });
     }
   }
 

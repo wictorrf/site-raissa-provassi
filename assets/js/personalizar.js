@@ -79,7 +79,7 @@
       box.innerHTML = buildInteriorSVG(c.notebooks);
     } else {
       const lc = byId(LEATHER_COLORS, c.leather), ec = byId(ELASTIC_COLORS, c.elastic);
-      box.innerHTML = buildExteriorSVG({ coverHex: lc.hex, elasticHex: ec.hex, engraveOn: c.engrave.on, engraveText: c.engrave.text, charmIds: c.charms });
+      box.innerHTML = buildExteriorSVG({ coverHex: lc.hex, elasticHex: ec.hex, engraveOn: c.engrave.on, engraveText: c.engrave.text, charmIds: c.charms, size: c.size });
     }
   }
 
