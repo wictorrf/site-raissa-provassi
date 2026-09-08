@@ -28,16 +28,22 @@ function buildExteriorSVG({ coverHex, elasticHex, engraveOn, engraveText, charmI
     <text x="105" y="92" text-anchor="middle" font-family="'Cormorant Garamond', serif" font-style="italic"
       font-weight="600" font-size="17" fill="rgba(255,255,255,${hasText ? 0.92 : 0.4})">${escapeXml(hasText ? engraveText.trim() : "Tu nombre")}</text>` : "";
   // los dijes van en una sola columna sobre la tapa, terminando justo arriba del
-  // elástico (como en la referencia) — el último queda pegado al elástico y los
-  // demás se acomodan hacia arriba.
-  const charmX = 66, charmGap = 26, charmLastY = 133;
-  const charms = charmIds || [];
-  const charmsMarkup = charms.map((id, i) => {
-    const cy = charmLastY - (charms.length - 1 - i) * charmGap;
+  // elástico (como en la referencia). Si eligieron más de 3, se muestran los
+  // primeros 3 y un círculo "+N" con el resto, para que la columna nunca crezca
+  // sin límite y termine tapando las pestañas de arriba.
+  const charmX = 66, charmGap = 26, charmLastY = 133, MAX_CHARM_SLOTS = 3;
+  const allCharms = charmIds || [];
+  const extraCount = allCharms.length - MAX_CHARM_SLOTS;
+  const shownCharms = extraCount > 0 ? allCharms.slice(0, MAX_CHARM_SLOTS) : allCharms;
+  const totalSlots = shownCharms.length + (extraCount > 0 ? 1 : 0);
+  const charmsMarkup = shownCharms.map((id, i) => {
+    const cy = charmLastY - (totalSlots - 1 - i) * charmGap;
     return `
       <circle cx="${charmX}" cy="${cy}" r="12" fill="#FAF7F2" stroke="rgba(0,0,0,.14)" stroke-width="1"></circle>
       <text x="${charmX}" y="${cy + 5}" text-anchor="middle" font-size="14">${CHARM_EMOJI[id] || "•"}</text>`;
-  }).join("");
+  }).join("") + (extraCount > 0 ? `
+    <circle cx="${charmX}" cy="${charmLastY}" r="12" fill="#3D2913"></circle>
+    <text x="${charmX}" y="${charmLastY + 4}" text-anchor="middle" font-family="'Manrope',sans-serif" font-weight="700" font-size="10" fill="#fff">+${extraCount}</text>` : "");
   const badgeMarkup = size ? `
     <rect x="149" y="16" width="41" height="24" rx="12" fill="#FAF7F2"></rect>
     <text x="169.5" y="32" text-anchor="middle" font-family="'Manrope',sans-serif" font-weight="700" font-size="12" fill="#3D2913">${escapeXml(size)}</text>` : "";
