@@ -38,8 +38,11 @@ function buildExteriorSVG({ coverHex, elasticHex, engraveOn, engraveText, charmI
   const badgeMarkup = size ? `
     <rect x="149" y="16" width="41" height="24" rx="12" fill="#FAF7F2"></rect>
     <text x="169.5" y="32" text-anchor="middle" font-family="'Manrope',sans-serif" font-weight="700" font-size="12" fill="#3D2913">${escapeXml(size)}</text>` : "";
+  // el A5 se dibuja más grande que el A6 (misma proporción real: 22cm vs 16,5cm de ancho),
+  // para que el cambio de tamaño se sienta también en la vista previa, no solo en la etiqueta.
+  const previewWidth = size === "A5" ? 200 : 150;
   return `
-  <svg class="journal-svg-dynamic" viewBox="0 0 220 300" style="width:150px; overflow:visible;">
+  <svg class="journal-svg-dynamic" viewBox="0 0 220 300" style="width:${previewWidth}px; overflow:visible;">
     <defs>
       <filter id="pv-shadow" x="-60%" y="-30%" width="220%" height="180%">
         <feDropShadow dx="0" dy="14" stdDeviation="12" flood-color="#000" flood-opacity=".3"></feDropShadow>
