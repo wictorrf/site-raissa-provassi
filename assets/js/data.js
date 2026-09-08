@@ -4,9 +4,7 @@
    reposicion.html y entrega.html.
    ============================================================ */
 
-// TODO: reemplazar por el número real de la clienta antes de publicar.
-// Número de prueba actual: Wictor (freelancer), Mar del Plata.
-const WHATSAPP_NUMBER = "5492236775547";
+const WHATSAPP_NUMBER = "5492236358794";
 
 const money = n => "$" + Math.round(n).toLocaleString("es-AR");
 

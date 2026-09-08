@@ -87,12 +87,13 @@ function buildInteriorSVG(notebooks) {
   const notebooksMarkup = notebooks.map((nb, i) => {
     const cover = byId(NOTEBOOK_COVERS, nb.cover);
     const x = startX + i * (w + gap);
-    const pageFill = nb.pauta === "lisa" ? "#FBF8F2" : `url(#pat-${nb.pauta})`;
-    const pageBase = nb.pauta === "lisa" ? "" : `<rect x="${x + 6}" y="70" width="${w - 12}" height="196" rx="3" fill="#FBF8F2"></rect>`;
+    // base clara siempre primero, y la pauta (si no es "lisa") va encima:
+    // antes se dibujaba la pauta y después una tapa lisa que la volvía a tapar.
+    const pagePattern = nb.pauta === "lisa" ? "" : `<rect x="${x + 6}" y="70" width="${w - 12}" height="196" rx="3" fill="url(#pat-${nb.pauta})"></rect>`;
     return `
       <rect x="${x}" y="20" width="${w}" height="260" rx="9" fill="${cover.hex}"></rect>
-      <rect x="${x + 6}" y="70" width="${w - 12}" height="196" rx="3" fill="${pageFill}"></rect>
-      ${pageBase}
+      <rect x="${x + 6}" y="70" width="${w - 12}" height="196" rx="3" fill="#FBF8F2"></rect>
+      ${pagePattern}
       <circle cx="${x + w / 2}" cy="35" r="10" fill="rgba(255,255,255,.88)"></circle>
       <text class="nb-badge" x="${x + w / 2}" y="39" text-anchor="middle" font-size="11" fill="#1B2740">${i + 1}</text>`;
   }).join("");
