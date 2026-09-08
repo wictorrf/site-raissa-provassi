@@ -86,9 +86,23 @@
   function refresh() {
     persist();
 
-    renderSizeGrid(document.getElementById("custSizeGrid"), c.size, (val) => { c.size = val; renderAddons(); refresh(); });
+    renderSizeGrid(document.getElementById("custSizeGrid"), c.size, (val) => { c.size = val; refresh(); });
     renderSwatchRow(document.getElementById("leatherGrid"), LEATHER_COLORS, c.leather, (val) => { c.leather = val; refresh(); });
     renderSwatchRow(document.getElementById("elasticGrid"), ELASTIC_COLORS, c.elastic, (val) => { c.elastic = val; refresh(); });
+    // el precio "de/por" de Regalá a alguien depende del tamaño y de la pauta de
+    // cada cuaderno, así que se recalcula acá siempre, no solo cuando cambia el tamaño.
+    renderAddons();
+
+    // los cuadernos se arman una sola vez en renderNotebooks(); acá solo se sincroniza
+    // qué tapa/pauta quedó marcada como seleccionada en cada uno.
+    c.notebooks.forEach((nb, i) => {
+      document.querySelectorAll(`[data-nbcover="${i}"] .swatch-item`).forEach(el => {
+        el.classList.toggle("selected", el.dataset.id === nb.cover);
+      });
+      document.querySelectorAll(`[data-nbpauta="${i}"] .pauta-option`).forEach(el => {
+        el.classList.toggle("selected", el.dataset.id === nb.pauta);
+      });
+    });
 
     document.getElementById("engraveToggle").classList.toggle("on", c.engrave.on);
     document.getElementById("engraveInputWrap").classList.toggle("show", c.engrave.on);
@@ -166,7 +180,6 @@
     renderChipGrid(document.getElementById("accessoryGrid"), ACCESSORIES, c.accessories, (id) => {
       toggleInArray(c.accessories, id); refresh();
     });
-    renderAddons();
     setupPreviewTabs("custPreviewTabs", (side) => { c.previewSide = side; refresh(); });
     if (c.previewSide === "dentro") {
       document.querySelectorAll("#custPreviewTabs .preview-tab").forEach(b => b.classList.toggle("active", b.dataset.side === "dentro"));
