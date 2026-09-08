@@ -27,10 +27,13 @@ function buildExteriorSVG({ coverHex, elasticHex, engraveOn, engraveText, charmI
   const engraveMarkup = engraveOn ? `
     <text x="105" y="92" text-anchor="middle" font-family="'Cormorant Garamond', serif" font-style="italic"
       font-weight="600" font-size="17" fill="rgba(255,255,255,${hasText ? 0.92 : 0.4})">${escapeXml(hasText ? engraveText.trim() : "Tu nombre")}</text>` : "";
-  // los dijes cuelgan del elástico, uno debajo del otro (no en grilla).
-  const charmX = 66, charmStartY = 172, charmGap = 28;
-  const charmsMarkup = (charmIds || []).map((id, i) => {
-    const cy = charmStartY + i * charmGap;
+  // los dijes van en una sola columna sobre la tapa, terminando justo arriba del
+  // elástico (como en la referencia) — el último queda pegado al elástico y los
+  // demás se acomodan hacia arriba.
+  const charmX = 66, charmGap = 26, charmLastY = 133;
+  const charms = charmIds || [];
+  const charmsMarkup = charms.map((id, i) => {
+    const cy = charmLastY - (charms.length - 1 - i) * charmGap;
     return `
       <circle cx="${charmX}" cy="${cy}" r="12" fill="#FAF7F2" stroke="rgba(0,0,0,.14)" stroke-width="1"></circle>
       <text x="${charmX}" y="${cy + 5}" text-anchor="middle" font-size="14">${CHARM_EMOJI[id] || "•"}</text>`;
@@ -50,10 +53,10 @@ function buildExteriorSVG({ coverHex, elasticHex, engraveOn, engraveText, charmI
     </defs>
     <g filter="url(#pv-shadow)">
       <rect x="30" y="10" width="150" height="280" rx="20" fill="${coverHex}"></rect>
-      <circle cx="47" cy="30" r="3" fill="rgba(255,255,255,.5)"></circle>
-      <circle cx="163" cy="30" r="3" fill="rgba(255,255,255,.5)"></circle>
-      <circle cx="47" cy="270" r="3" fill="rgba(255,255,255,.5)"></circle>
-      <circle cx="163" cy="270" r="3" fill="rgba(255,255,255,.5)"></circle>
+      <circle cx="55" cy="30" r="3" fill="rgba(255,255,255,.5)"></circle>
+      <circle cx="72" cy="30" r="3" fill="rgba(255,255,255,.5)"></circle>
+      <circle cx="55" cy="270" r="3" fill="rgba(255,255,255,.5)"></circle>
+      <circle cx="72" cy="270" r="3" fill="rgba(255,255,255,.5)"></circle>
       ${engraveMarkup}
       <rect x="30" y="140" width="150" height="11" fill="${elasticHex}"></rect>
       <rect x="30" y="140" width="150" height="3" fill="rgba(255,255,255,.2)"></rect>

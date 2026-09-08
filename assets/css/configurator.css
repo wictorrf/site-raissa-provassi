@@ -95,26 +95,28 @@
 .preset-desc{ font-size:.74rem; color:var(--muted); margin-top:.6em; letter-spacing:.02em; }
 .preset-price{ font-weight:800; font-size:1.15rem; color:var(--marsala); white-space:nowrap; }
 
-/* sidebar (desktop) */
+/* sidebar (desktop) — tarjeta clara, como en la referencia: la vista previa
+   vive en un bloque beige que llega hasta el borde de la tarjeta, y el resto
+   (resumen, total, botón) queda en blanco con texto oscuro. */
 .sidebar{ position:sticky; top:88px; }
-.sidebar-card{ background:var(--couro); color:#fff; border-radius:var(--r-lg); padding:34px 30px; box-shadow:var(--shadow); }
-.sidebar-preview{ display:flex; justify-content:center; padding:6px 0 22px; min-height:190px; align-items:center; }
+.sidebar-card{ background:#fff; color:var(--ink); border-radius:var(--r-lg); padding:34px 30px; box-shadow:var(--shadow); overflow:hidden; }
+.preview-block{ background:var(--card); margin:-34px -30px 26px; padding:20px 0 22px; border-radius:var(--r-lg) var(--r-lg) 0 0; }
+.sidebar-preview{ display:flex; justify-content:center; align-items:center; min-height:170px; }
 .sidebar-preview svg{ width:150px; }
-.preview-tabs{ display:flex; gap:4px; background:rgba(255,255,255,.1); padding:4px; border-radius:999px; margin:0 auto 6px; width:max-content; }
-.preview-tab{ background:none; border:none; color:rgba(255,255,255,.65); font-family:inherit; font-size:.76rem; letter-spacing:.02em; padding:.5em 1.15em; border-radius:999px; cursor:pointer; transition:all .2s; }
-.preview-tab:hover{ color:#fff; }
-.preview-tab.active{ background:var(--gold); color:var(--ink); font-weight:700; }
-.sidebar-title{ text-transform:uppercase; letter-spacing:.16em; font-size:.7rem; color:var(--gold); margin-bottom:16px; font-weight:700; }
-.sum-row{ display:flex; justify-content:space-between; gap:14px; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.14); font-size:.88rem; }
+.preview-tabs{ display:flex; gap:4px; background:rgba(0,0,0,.05); padding:4px; border-radius:999px; margin:0 auto 4px; width:max-content; }
+.preview-tab{ background:none; border:none; color:var(--muted); font-family:inherit; font-size:.76rem; letter-spacing:.02em; padding:.5em 1.15em; border-radius:999px; cursor:pointer; transition:all .2s; }
+.preview-tab:hover{ color:var(--ink); }
+.preview-tab.active{ background:#fff; color:var(--ink); font-weight:700; box-shadow:0 2px 6px rgba(0,0,0,.15); }
+.sidebar-title{ text-transform:uppercase; letter-spacing:.16em; font-size:.7rem; color:var(--marsala); margin-bottom:16px; font-weight:700; }
+.sum-row{ display:flex; justify-content:space-between; gap:14px; padding:10px 0; border-bottom:1px solid var(--line); font-size:.88rem; }
 .sum-row:last-of-type{ border-bottom:none; }
-.sum-row .k{ color:rgba(255,255,255,.6); }
-.sum-row .v{ text-align:right; font-weight:500; }
-.sum-total{ display:flex; justify-content:space-between; align-items:baseline; margin-top:18px; padding-top:18px; border-top:1px solid rgba(255,255,255,.14); }
+.sum-row .k{ color:var(--muted); }
+.sum-row .v{ text-align:right; font-weight:600; color:var(--ink); }
+.sum-total{ display:flex; justify-content:space-between; align-items:baseline; margin-top:18px; padding-top:18px; border-top:1px solid var(--line); }
 .sum-total .k{ font-weight:800; font-size:1.05rem; }
-.sum-total .v{ font-weight:800; font-size:1.6rem; color:var(--gold); }
-.sidebar .btn-couro{ margin-top:24px; background:var(--gold); color:var(--ink); }
-.sidebar .btn-couro:hover{ background:#e9bd6f; }
-.sidebar-note{ text-align:center; font-size:.75rem; color:rgba(255,255,255,.5); margin-top:12px; }
+.sum-total .v{ font-weight:800; font-size:1.6rem; color:var(--marsala); }
+.sidebar .btn-couro{ margin-top:24px; }
+.sidebar-note{ text-align:center; font-size:.75rem; color:var(--muted); margin-top:12px; }
 
 /* barra fija de mobile (reemplaza la sidebar en pantallas chicas) */
 .mobile-order-bar{ display:none; }
