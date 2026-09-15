@@ -68,6 +68,8 @@
 .pr-foot .foot-social a{ width:40px; height:40px; border-radius:11px; background:rgba(255,255,255,.08); display:flex; align-items:center; justify-content:center; padding:0; transition:background .15s; }
 .pr-foot .foot-social a:hover{ background:rgba(255,255,255,.18); }
 .pr-foot .foot-social svg{ width:20px; height:20px; }
+.pr-foot .foot-email{ display:block; margin-top:14px; font-size:13px; font-style:italic; color:#c9a06a; padding:0; }
+.pr-foot .foot-email:hover{ color:#fff; }
 .pr-foot .foot-bottom{ margin-top:44px; padding-top:22px; border-top:1px solid rgba(255,255,255,.12); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; font-size:12.5px; color:#b7a488; }
 @media (max-width:1000px){
   .pr-foot .foot-grid{ grid-template-columns:1fr 1fr; gap:32px; }

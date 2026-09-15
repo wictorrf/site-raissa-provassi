@@ -61,21 +61,25 @@
           <span class="fc-icon">✦</span>
           <h4>Cuero &amp; colores</h4>
           <p>Seis colores de cuero legítimo para una tapa que dura toda la vida.</p>
+          <div class="fc-photo photo-slot" data-photo-hint="foto: cuero y colores"><span>Foto</span></div>
         </a>
         <a class="feature-card" href="personalizar.html">
           <span class="fc-icon">✎</span>
           <h4>3 cuadernos &amp; pauta</h4>
           <p>Armá los tres cuadernos y elegí la pauta de cada uno.</p>
+          <div class="fc-photo photo-slot" data-photo-hint="foto: 3 cuadernos y pauta"><span>Foto</span></div>
         </a>
         <a class="feature-card" href="personalizar.html">
           <span class="fc-icon">✍</span>
           <h4>Grabado en el cuero</h4>
           <p>Tu nombre o una fecha grabada en la tapa.</p>
+          <div class="fc-photo photo-slot" data-photo-hint="foto: grabado en el cuero"><span>Foto</span></div>
         </a>
         <a class="feature-card" href="personalizar.html">
           <span class="fc-icon">▭</span>
           <h4>Tamaño A5 o A6</h4>
           <p>Del compacto al completo, como vos lo uses.</p>
+          <div class="fc-photo photo-slot" data-photo-hint="foto: tamaño A5 o A6"><span>Foto</span></div>
         </a>
       </div>
       <div class="center" style="margin-top:36px;">
@@ -134,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <div class="product-body">
         <h3>${p.name}</h3>
         <span class="product-from">Desde</span>
-        <span class="product-price">${money(SIZES.find(s => s.id === "A6").price)}</span>
+        <span class="product-price">${money(SIZE_PRICES.preset.A6)}</span>
         <a class="btn btn-ghost btn-block" href="coleccion.html?preset=${p.id}">Ver →</a>
       </div>
     </div>`;

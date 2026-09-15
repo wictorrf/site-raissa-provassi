@@ -14,6 +14,8 @@ const NAV_LINKS = [
 
 const WPP_ICON_SVG = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.28-1.38a9.9 9.9 0 0 0 4.76 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2zm5.8 14.13c-.24.68-1.4 1.3-1.93 1.38-.5.08-1.11.11-1.79-.11-.41-.13-.94-.3-1.62-.6-2.84-1.23-4.7-4.1-4.84-4.29-.14-.19-1.16-1.54-1.16-2.94s.73-2.09.99-2.37c.26-.28.56-.35.75-.35h.54c.17 0 .4-.06.63.48.24.56.8 1.94.87 2.08.07.14.12.31.02.5-.1.19-.15.31-.29.48-.14.17-.3.37-.43.5-.14.14-.29.29-.13.57.17.28.75 1.24 1.6 2.01 1.1 1 2.03 1.31 2.31 1.46.28.14.44.12.6-.07.17-.19.72-.84.91-1.13.19-.28.38-.24.63-.14.26.09 1.64.77 1.92.91.28.14.47.21.54.33.07.12.07.68-.17 1.36z"/></svg>`;
 
+const INSTAGRAM_ICON_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"></circle></svg>`;
+
 function renderNav(activePage) {
   const links = NAV_LINKS.map(l =>
     `<a href="${l.href}" class="${l.page === activePage ? "on" : ""}">${l.label}</a>`
@@ -42,7 +44,6 @@ function renderFooter() {
       <div class="foot-grid">
         <div class="foot-brand">
           <img class="flogo" src="assets/img/logo.png" alt="Priori">
-          <p>Journals de cuero legítimo, hechos a mano en América Latina. Una tapa para toda la vida, cuadernos que cambiás cuando querés.</p>
         </div>
         <div class="foot-col">
           <h5>Políticas</h5>
@@ -57,13 +58,15 @@ function renderFooter() {
         <div class="foot-col">
           <h5>Seguinos</h5>
           <div class="foot-social">
+            <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener" aria-label="Instagram">${INSTAGRAM_ICON_SVG}</a>
             <a href="https://wa.me/${WHATSAPP_NUMBER}" target="_blank" rel="noopener" aria-label="WhatsApp">${WPP_ICON_SVG}</a>
           </div>
+          <a class="foot-email" href="${CONTACT_EMAIL ? "mailto:" + CONTACT_EMAIL : "#"}">${CONTACT_EMAIL || "[agregar e-mail]"}</a>
         </div>
       </div>
       <div class="foot-bottom">
         <span>© 2026 Priori · Hecho a mano en América Latina.</span>
-        <span>Por Raissa Provassi</span>
+        <span>Por Raíssa Provasi</span>
       </div>
     </div>
   </footer>`;

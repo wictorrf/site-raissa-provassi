@@ -5,15 +5,26 @@
    ============================================================ */
 
 const WHATSAPP_NUMBER = "5492236358794";
+const INSTAGRAM_URL = "https://instagram.com/priori.colletion";
+const INSTAGRAM_HANDLE = "@priori.colletion";
+const CONTACT_EMAIL = ""; // pendiente: Raíssa todavía no nos pasó el e-mail de contacto
 
 const money = n => "$" + Math.round(n).toLocaleString("es-AR");
 
-const SIZES = [
-  { id: "A5", name: "A5", dim: "22 × 14 cm", price: 52000 },
-  { id: "A6", name: "A6", dim: "16,5 × 11 cm", price: 38000 },
+// Tamaños: mismas medidas físicas, precio distinto según el producto
+// (colección lista, personalizado desde cero o reposición por cuaderno).
+const SIZE_META = [
+  { id: "A5", name: "A5", dim: "22 × 14 cm" },
+  { id: "A6", name: "A6", dim: "16,5 × 11 cm" },
 ];
+const SIZE_PRICES = {
+  preset: { A5: 27000, A6: 20000 }, // coleccion.html — Modelos ya armados
+  custom: { A5: 28000, A6: 22000 }, // personalizar.html — Armá tu Priori
+  refill: { A5: 8000, A6: 6000 },   // reposicion.html — por cuaderno
+};
+function sizesFor(flow) { return SIZE_META.map(s => ({ ...s, price: SIZE_PRICES[flow][s.id] })); }
 
-const PRINTED_PAUTA_PRICE = 2000; // por cuaderno, si no es "lisa"
+const PONTILHADO_EXTRA = 3000; // por cuaderno, solo en "Armá tu Priori" si la pauta es punteada
 
 const LEATHER_COLORS = [
   { id: "marron", name: "Marrón", hex: "#6B4530" },
@@ -34,10 +45,35 @@ const ELASTIC_COLORS = [
   { id: "rojo", name: "Rojo", hex: "#A3272C" },
 ];
 
-const NOTEBOOK_COVERS = [
+// Color de tapa de cada cuaderno — 3 paletas distintas según el contexto
+// (así lo pidió la clienta: cada pantalla tiene su propia gama de colores).
+const COVERS_BUILD = [ // "Los 3 cuadernos" del personalizador (Armá tu Priori)
   { id: "azul", name: "Azul", hex: "#3A5A8C" },
-  { id: "rosa", name: "Rosa liso", hex: "#E7B7C0" },
-  { id: "negro", name: "Negro liso", hex: "#232019" },
+  { id: "verde-agua", name: "Verde agua", hex: "#8FC1B5" },
+  { id: "azul-claro", name: "Azul claro", hex: "#A9C8E8" },
+  { id: "bege", name: "Bege", hex: "#D8C3A5" },
+  { id: "amarelo-manteiga", name: "Amarillo manteca", hex: "#E8D08A" },
+  { id: "preto", name: "Negro", hex: "#201C19" },
+];
+const COVERS_REFILL_A5 = [ // Reposición (A5) y "Refil extra" A5 en ambos "Sumá algo más"
+  { id: "azul-claro", name: "Azul claro", hex: "#A9C8E8" },
+  { id: "bege", name: "Bege", hex: "#D8C3A5" },
+  { id: "azul-marino", name: "Azul marino", hex: "#1B2740" },
+  { id: "verde-oliva", name: "Verde oliva", hex: "#7C7A4A" },
+  { id: "bege-quemado", name: "Bege quemado", hex: "#B79A6B" },
+  { id: "negro", name: "Negro", hex: "#201C19" },
+];
+const COVERS_REFILL_A6 = [ // Reposición (A6) y "Outro refil extra" A6 en ambos "Sumá algo más"
+  { id: "verde-oscuro", name: "Verde oscuro", hex: "#2F4A38" },
+  { id: "verde-claro", name: "Verde claro", hex: "#9FC48C" },
+  { id: "oliva", name: "Oliva", hex: "#7C7A4A" },
+  { id: "morado", name: "Morado", hex: "#5B3A6B" },
+  { id: "vino", name: "Vino", hex: "#6E2436" },
+  { id: "pink", name: "Pink", hex: "#E85D9E" },
+  { id: "rosa-bebe", name: "Rosa bebé", hex: "#F3C9D4" },
+  { id: "azul-claro", name: "Azul claro", hex: "#A9C8E8" },
+  { id: "azul-marino", name: "Azul marino", hex: "#1B2740" },
+  { id: "marron", name: "Marrón", hex: "#6B4530" },
 ];
 
 const PAUTAS = [
@@ -45,51 +81,68 @@ const PAUTAS = [
   { id: "lisa", name: "Lisa" },
   { id: "rayada", name: "Rayada" },
 ];
+const PAUTAS_REFILL = PAUTAS.filter(p => p.id !== "punteada"); // Reposición: solo Rayada/Lisa
 
+// Dijes — el primero que se elige es gratis; desde el segundo se cobra $600 por
+// unidad, con la excepción del Cisne que siempre cobra $1.500 (ver calcCharmsTotal).
 const CHARMS = [
-  { id: "margarita", name: "Margarita", price: 3000 },
-  { id: "abejita", name: "Abejita", price: 3500 },
-  { id: "fresa", name: "Fresa", price: 3000 },
-  { id: "cisne", name: "Cisne", price: 4500 },
-  { id: "cereza", name: "Cereza", price: 3000 },
-  { id: "palta", name: "Palta", price: 3500 },
-  { id: "flores", name: "Flores", price: 3000 },
-  { id: "luna", name: "Luna", price: 4000 },
-  { id: "animalitos", name: "Animalitos", price: 3500 },
+  { id: "margarita", name: "Margarita", price: 600 },
+  { id: "abejita", name: "Abejita", price: 600 },
+  { id: "fresa", name: "Fresa", price: 600 },
+  { id: "cisne", name: "Cisne", price: 1500 },
+  { id: "cereza", name: "Cereza", price: 500 },
+  { id: "palta", name: "Palta", price: 600 },
+  { id: "flores", name: "Flores", price: 600 },
+  { id: "luna", name: "Luna", price: 600 },
+  { id: "joaninha", name: "Joaninha", price: 600 },
+  { id: "cachorro-salsicha", name: "Cachorro salchicha", price: 600 },
+  { id: "nuvem", name: "Nube", price: 600 },
+  { id: "profissoes", name: "Profesiones", price: 600 },
 ];
 const CHARM_EMOJI = {
   margarita: "🌼", abejita: "🐝", fresa: "🍓", cisne: "🦢", cereza: "🍒",
-  palta: "🥑", flores: "🌸", luna: "🌙", animalitos: "🐾",
+  palta: "🥑", flores: "🌸", luna: "🌙", joaninha: "🐞",
+  "cachorro-salsicha": "🐕", nuvem: "☁️", profissoes: "💼",
 };
+// pickedIds = ids elegidos en el orden en que se sumaron (con repetición = cantidad).
+function calcCharmsTotal(pickedIds) {
+  return pickedIds.reduce((total, id, i) => i === 0 ? total : total + (id === "cisne" ? 1500 : 600), 0);
+}
 
 const ACCESSORIES = [
-  { id: "broche", name: "Broche metálico", price: 3500 },
-  { id: "marcador", name: "Marcador de página metálico", price: 2500 },
-  { id: "polaroid", name: "Foto Polaroid en la tapa", price: 4000 },
-  { id: "portalapices", name: "Portalápices de cuero", price: 6000 },
-  { id: "encaje", name: "Detalle de encaje", price: 3000 },
-  { id: "lazos", name: "Lazos", price: 2000 },
+  { id: "broche", name: "Broche personalizado", price: 3000 },
+  { id: "marcador", name: "Marcador de página metálico", price: 2000 },
+  { id: "polaroid", name: "Foto Polaroid en la tapa", price: 6000 },
+  { id: "portalapices-metal", name: "Portalápices metálico", price: 4000 },
+  { id: "portalapices-cuero", name: "Portalápices en cuero", price: 3000 },
+  { id: "presilla", name: "Presilla metálica", price: 3000 },
+  { id: "lazos", name: "Lazos o rendas", price: 2000 },
 ];
 
 // Los 4 modelos de la colección lista. El precio NO se guarda acá:
-// se deriva de SIZES según el tamaño elegido en coleccion.html
-// (antes estaba hardcodeado en $52.000 = precio del A5, sin opción de A6).
+// se deriva de SIZE_PRICES.preset según el tamaño elegido en coleccion.html.
 const PRESETS = [
-  { id: "clasico", name: "Clásico", copy: "Atemporal y versátil: el punto de partida perfecto para tu primer Priori.", desc: "Cuero marrón · elástico marrón", leather: "marron", elastic: "marron" },
-  { id: "romance", name: "Romance", copy: "Delicado y femenino, para quien escribe con el corazón.", desc: "Cuero rosa claro · elástico rosa bebé", leather: "rosa-claro", elastic: "rosa-bebe" },
-  { id: "marino", name: "Marino", copy: "Elegante y sereno, inspirado en la calma de las ideas claras.", desc: "Cuero azul marino · elástico azul marino", leather: "azul-marino", elastic: "azul-marino" },
-  { id: "vino", name: "Vino", copy: "Profundo y romántico, con un contraste que enamora.", desc: "Cuero marsala · elástico rosa bebé", leather: "marsala", elastic: "rosa-bebe" },
+  { id: "origem", name: "Origem", copy: "Inspirado en lo esencial: cálido y atemporal, perfecto para tu primer Priori.", desc: "Cuero marrón · elástico rosa bebé · dije de cisne · 3 cuadernos Priori", leather: "marron", elastic: "rosa-bebe" },
+  { id: "serena", name: "Serena", copy: "Delicado y femenino, pensado para acompañar tu corazón y tu creatividad.", desc: "Cuero rosa claro · elástico rosa bebé · dije de cisne · 3 cuadernos Priori, hoja blanca", leather: "rosa-claro", elastic: "rosa-bebe" },
+  { id: "luna", name: "Luna", copy: "Elegante y sereno, para dejar espacio a nuevas ideas.", desc: "Cuero azul marino · elástico azul claro · dije de cisne · 3 cuadernos Priori", leather: "azul-marino", elastic: "azul-bebe" },
+  { id: "aura", name: "Aura", copy: "Intenso y sofisticado, con un toque de personalidad.", desc: "Cuero marsala · elástico rosa bebé · dije de cisne · 3 cuadernos Priori", leather: "marsala", elastic: "rosa-bebe" },
 ];
 
-const ADDONS = {
-  refill: { name: "Refill extra · 3 cuadernos", desc: "Un juego extra de 3 cuadernos para cuando termines el que tenés. La tapa es para toda la vida.", original: 18000, price: 13500 },
+// Refil extra: 3 productos con cantidad seleccionable, precio distinto según el
+// flujo (colección lista vs. personalizado desde cero) — así lo pidió la clienta.
+const REFILL_EXTRAS = {
+  preset: [
+    { id: "rajado-a5", name: "Refil extra · hoja rayada (A5)", unitPrice: 7000, size: "A5", colors: COVERS_REFILL_A5, photos: 6 },
+    { id: "liso-a5-dorado", name: "Refil extra · hoja lisa, negro con detalle dorado (A5)", unitPrice: 7000, size: "A5", fixedColorLabel: "Negro con detalle en dorado exclusivo de la marca.", photos: 1 },
+    { id: "a6", name: "Refil extra (A6) · lisa o rayada", unitPrice: 6000, size: "A6", colors: COVERS_REFILL_A6, photos: 4 },
+  ],
+  custom: [
+    { id: "rajado-a5", name: "Refil extra · hoja rayada (A5)", unitPrice: 8000, size: "A5", colors: COVERS_REFILL_A5, photos: 6 },
+    { id: "liso-a5-dorado", name: "Refil extra · hoja lisa, negro con detalle dorado (A5)", unitPrice: 8000, size: "A5", fixedColorLabel: "Negro con detalle en dorado exclusivo de la marca.", photos: 1 },
+    { id: "a6", name: "Refil extra (A6) · lisa o rayada", unitPrice: 6000, size: "A6", colors: COVERS_REFILL_A6, photos: 4 },
+  ],
 };
-const GIFT_DISCOUNT = 0.35; // 35% off en el segundo journal (mismo tamaño y pauta)
 
-// Reposición: comprar solo un juego de 3 cuadernos (sin tapa), en color sólido.
-// Mismo precio del refill que ya existía dentro del personalizador — fuente única.
-const REFILL_SETS = {
-  simple: { name: "Juego de 3 cuadernos · color sólido", original: ADDONS.refill.original, price: ADDONS.refill.price },
-};
+const GIFT_DISCOUNT = 0.35; // 35% off en el segundo journal (mismo tamaño y pauta)
 
 function byId(list, id) { return list.find(x => x.id === id); }
