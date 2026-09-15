@@ -73,6 +73,8 @@ function buildExteriorSVG({ coverHex, elasticHex, engraveOn, engraveText, charmI
 }
 
 // "Por dentro": los 3 cuadernos lado a lado, cada uno con su color y pauta.
+// notebooks = [{ coverHex, pauta }] — el hex ya resuelto por el caller, porque
+// según la pantalla la tapa de cada cuaderno sale de una paleta distinta.
 function buildInteriorSVG(notebooks) {
   const w = 56, gap = 8, totalW = w * 3 + gap * 2, startX = (220 - totalW) / 2;
   const patternDefs = `
@@ -85,13 +87,12 @@ function buildInteriorSVG(notebooks) {
       </pattern>
     </defs>`;
   const notebooksMarkup = notebooks.map((nb, i) => {
-    const cover = byId(NOTEBOOK_COVERS, nb.cover);
     const x = startX + i * (w + gap);
     // base clara siempre primero, y la pauta (si no es "lisa") va encima:
     // antes se dibujaba la pauta y después una tapa lisa que la volvía a tapar.
     const pagePattern = nb.pauta === "lisa" ? "" : `<rect x="${x + 6}" y="70" width="${w - 12}" height="196" rx="3" fill="url(#pat-${nb.pauta})"></rect>`;
     return `
-      <rect x="${x}" y="20" width="${w}" height="260" rx="9" fill="${cover.hex}"></rect>
+      <rect x="${x}" y="20" width="${w}" height="260" rx="9" fill="${nb.coverHex}"></rect>
       <rect x="${x + 6}" y="70" width="${w - 12}" height="196" rx="3" fill="#FBF8F2"></rect>
       ${pagePattern}
       <circle cx="${x + w / 2}" cy="35" r="10" fill="rgba(255,255,255,.88)"></circle>
