@@ -1,7 +1,6 @@
 /* ============================================================
-   PRIORI — bloque "Sumá algo más" (los 3 refis extra con cantidad
-   + "Regalá a alguien"), compartido entre personalizar.js y
-   coleccion.js.
+   PRIORI — bloque "Sumá algo más" (los 3 refis extra con cantidad),
+   compartido entre personalizar.js y coleccion.js.
    ============================================================ */
 
 // flow = "preset" (coleccion.html) | "custom" (personalizar.html) — cada uno
@@ -9,10 +8,8 @@
 // refillQty = { [itemId]: cantidad }, refillColors = { [itemId]: colorId }
 // refillPauta = { [itemId]: pautaId } (solo se usa en items con pautaOptions)
 // refillPhotoIndex = { [itemId]: índice del carrusel de fotos }
-// addonsState = { gift: bool }, base = precio del journal sin extras (para el 35% off)
-function renderAddonsBlock(container, { flow, refillQty, refillColors, refillPauta, refillPhotoIndex, addonsState, base, onRefillQtyChange, onRefillColorChange, onRefillPautaChange, onRefillPhotoIndexChange, onToggleGift }) {
+function renderAddonsBlock(container, { flow, refillQty, refillColors, refillPauta, refillPhotoIndex, onRefillQtyChange, onRefillColorChange, onRefillPautaChange, onRefillPhotoIndexChange }) {
   const extras = REFILL_EXTRAS[flow];
-  const giftPrice = Math.round(base * (1 - GIFT_DISCOUNT));
 
   const refillCards = extras.map(item => {
     let colorMarkup = "";
@@ -39,14 +36,7 @@ function renderAddonsBlock(container, { flow, refillQty, refillColors, refillPau
       </div>`;
   }).join("");
 
-  container.innerHTML = refillCards + `
-    <div class="addon-card ${addonsState.gift ? 'selected' : ''}" data-id="gift">
-      <div class="addon-check">✓</div>
-      <div class="addon-body">
-        <div class="addon-top"><strong>Regalá a alguien</strong><span class="addon-price"><span class="was">${money(base)}</span>${money(giftPrice)}</span></div>
-        <p>Llevá un segundo journal (mismo tamaño y pauta) con ${Math.round(GIFT_DISCOUNT * 100)}% de descuento.</p>
-      </div>
-    </div>`;
+  container.innerHTML = refillCards;
 
   extras.forEach(item => {
     renderQuantityStepper(container.querySelector(`[data-refillqty="${item.id}"]`), refillQty[item.id] || 0, (n) => onRefillQtyChange(item.id, n));
@@ -61,8 +51,6 @@ function renderAddonsBlock(container, { flow, refillQty, refillColors, refillPau
     }
     renderPhotoCarousel(container.querySelector(`[data-refillphotos="${item.id}"]`), item.photos, refillPhotoIndex[item.id] || 0, item.name, (idx) => onRefillPhotoIndexChange(item.id, idx));
   });
-
-  container.querySelector('[data-id="gift"]').addEventListener("click", onToggleGift);
 }
 
 // Resuelve la pauta efectiva de un ítem de refil extra: fija (item.pauta) o

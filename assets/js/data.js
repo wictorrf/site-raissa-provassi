@@ -143,6 +143,4 @@ const REFILL_EXTRAS = {
   ],
 };
 
-const GIFT_DISCOUNT = 0.35; // 35% off en el segundo journal (mismo tamaño y pauta)
-
 function byId(list, id) { return list.find(x => x.id === id); }

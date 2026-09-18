@@ -23,7 +23,6 @@
     refillColors: {},
     refillPauta: {},
     refillPhotoIndex: {},
-    addons: { gift: false },
     previewSide: "fuera",
   });
 
@@ -31,7 +30,7 @@
 
   function persist() { saveLiveState(FLOW, c); }
 
-  function baseForGift() {
+  function baseTotal() {
     const size = byId(sizesFor(SIZE_FLOW), c.size);
     let base = size.price;
     c.notebooks.forEach(nb => { if (nb.pauta === "punteada") base += PONTILHADO_EXTRA; });
@@ -39,12 +38,11 @@
   }
 
   function total() {
-    let t = baseForGift(); // tamaño + extra por pauta punteada
+    let t = baseTotal(); // tamaño + extra por pauta punteada
     if (c.engrave.on) t += 4000;
     t += calcCharmsTotal(c.charms);
     c.accessories.forEach(id => { t += byId(ACCESSORIES, id).price; });
     t += refillExtrasTotal(SIZE_FLOW, c.refill);
-    if (c.addons.gift) t += Math.round(baseForGift() * (1 - GIFT_DISCOUNT));
     return t;
   }
 
@@ -90,13 +88,10 @@
       refillColors: c.refillColors,
       refillPauta: c.refillPauta,
       refillPhotoIndex: c.refillPhotoIndex,
-      addonsState: c.addons,
-      base: baseForGift(),
       onRefillQtyChange: (id, n) => { c.refill[id] = n; refresh(); },
       onRefillColorChange: (id, val) => { c.refillColors[id] = val; refresh(); },
       onRefillPautaChange: (id, val) => { c.refillPauta[id] = val; refresh(); },
       onRefillPhotoIndexChange: (id, idx) => { c.refillPhotoIndex[id] = idx; refresh(); },
-      onToggleGift: () => { c.addons.gift = !c.addons.gift; refresh(); },
     });
   }
 
@@ -167,7 +162,6 @@
         lines.push({ label: `Agregado: ${item.name}`, value: `x${qty} · ${color} · Pauta ${pauta}` });
       }
     });
-    if (c.addons.gift) lines.push({ label: "Agregado", value: `segundo journal de regalo (-${Math.round(GIFT_DISCOUNT * 100)}%)` });
 
     savePendingOrder({ flow: FLOW, lines, total: total() });
     window.location.href = "entrega.html";

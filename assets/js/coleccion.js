@@ -16,7 +16,6 @@
   const defaultState = () => ({
     preset: presetFromQuery(),
     size: "A5",
-    addons: { gift: false },
     refill: {},
     refillColors: {},
     refillPauta: {},
@@ -39,7 +38,6 @@
   function total() {
     let t = baseTotal();
     t += refillExtrasTotal(SIZE_FLOW, c.refill);
-    if (c.addons.gift) t += Math.round(baseTotal() * (1 - GIFT_DISCOUNT));
     return t;
   }
 
@@ -84,13 +82,10 @@
       refillColors: c.refillColors,
       refillPauta: c.refillPauta,
       refillPhotoIndex: c.refillPhotoIndex,
-      addonsState: c.addons,
-      base: baseTotal(),
       onRefillQtyChange: (id, n) => { c.refill[id] = n; refresh(); },
       onRefillColorChange: (id, val) => { c.refillColors[id] = val; refresh(); },
       onRefillPautaChange: (id, val) => { c.refillPauta[id] = val; refresh(); },
       onRefillPhotoIndexChange: (id, idx) => { c.refillPhotoIndex[id] = idx; refresh(); },
-      onToggleGift: () => { c.addons.gift = !c.addons.gift; refresh(); },
     });
   }
 
@@ -140,8 +135,6 @@
         lines.push({ label: `Agregado: ${item.name}`, value: `x${qty} · ${color} · Pauta ${pauta}` });
       }
     });
-    if (c.addons.gift) lines.push({ label: "Agregado", value: `segundo journal de regalo (-${Math.round(GIFT_DISCOUNT * 100)}%)` });
-
     savePendingOrder({ flow: FLOW, lines, total: total() });
     window.location.href = "entrega.html";
   }
