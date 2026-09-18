@@ -16,9 +16,10 @@
   const defaultState = () => ({
     preset: presetFromQuery(),
     size: "A5",
-    addons: { gift: false },
     refill: {},
     refillColors: {},
+    refillPauta: {},
+    refillPhotoIndex: {},
     previewSide: "fuera",
   });
 
@@ -37,7 +38,6 @@
   function total() {
     let t = baseTotal();
     t += refillExtrasTotal(SIZE_FLOW, c.refill);
-    if (c.addons.gift) t += Math.round(baseTotal() * (1 - GIFT_DISCOUNT));
     return t;
   }
 
@@ -47,7 +47,7 @@
       const lc = byId(LEATHER_COLORS, p.leather), ec = byId(ELASTIC_COLORS, p.elastic);
       return `<div class="preset-card ${p.id === c.preset ? 'selected' : ''}" data-id="${p.id}">
         <div class="preset-photo photo-slot" data-photo-hint="foto: modelo ${p.name}" style="background:linear-gradient(150deg, ${lc.hex}22, ${ec.hex}33);">
-          ${journalIconSVG(lc.hex, ec.hex, 74)}
+          <span>Foto</span>
         </div>
         <div class="preset-card-body">
           <div>
@@ -80,11 +80,12 @@
       flow: SIZE_FLOW,
       refillQty: c.refill,
       refillColors: c.refillColors,
-      addonsState: c.addons,
-      base: baseTotal(),
+      refillPauta: c.refillPauta,
+      refillPhotoIndex: c.refillPhotoIndex,
       onRefillQtyChange: (id, n) => { c.refill[id] = n; refresh(); },
       onRefillColorChange: (id, val) => { c.refillColors[id] = val; refresh(); },
-      onToggleGift: () => { c.addons.gift = !c.addons.gift; refresh(); },
+      onRefillPautaChange: (id, val) => { c.refillPauta[id] = val; refresh(); },
+      onRefillPhotoIndexChange: (id, idx) => { c.refillPhotoIndex[id] = idx; refresh(); },
     });
   }
 
@@ -130,11 +131,10 @@
       const qty = c.refill[item.id] || 0;
       if (qty > 0) {
         const color = item.colors ? byId(item.colors, c.refillColors[item.id] || item.colors[0].id).name : item.fixedColorLabel;
-        lines.push({ label: `Agregado: ${item.name}`, value: `x${qty} · ${color}` });
+        const pauta = refillItemPautaName(item, c.refillPauta);
+        lines.push({ label: `Agregado: ${item.name}`, value: `x${qty} · ${color} · Pauta ${pauta}` });
       }
     });
-    if (c.addons.gift) lines.push({ label: "Agregado", value: `segundo journal de regalo (-${Math.round(GIFT_DISCOUNT * 100)}%)` });
-
     savePendingOrder({ flow: FLOW, lines, total: total() });
     window.location.href = "entrega.html";
   }

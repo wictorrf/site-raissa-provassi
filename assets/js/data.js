@@ -4,10 +4,10 @@
    reposicion.html y entrega.html.
    ============================================================ */
 
-const WHATSAPP_NUMBER = "5492236358794";
+const WHATSAPP_NUMBER = "549223548446";
 const INSTAGRAM_URL = "https://instagram.com/priori.colletion";
 const INSTAGRAM_HANDLE = "@priori.colletion";
-const CONTACT_EMAIL = ""; // pendiente: Raíssa todavía no nos pasó el e-mail de contacto
+const CONTACT_EMAIL = "hola.prioricollection@gmail.com";
 
 const money = n => "$" + Math.round(n).toLocaleString("es-AR");
 
@@ -106,7 +106,7 @@ const CHARM_EMOJI = {
 };
 // pickedIds = ids elegidos en el orden en que se sumaron (con repetición = cantidad).
 function calcCharmsTotal(pickedIds) {
-  return pickedIds.reduce((total, id, i) => i === 0 ? total : total + (id === "cisne" ? 1500 : 600), 0);
+  return pickedIds.reduce((total, id, i) => i === 0 ? total : total + byId(CHARMS, id).price, 0);
 }
 
 const ACCESSORIES = [
@@ -122,27 +122,25 @@ const ACCESSORIES = [
 // Los 4 modelos de la colección lista. El precio NO se guarda acá:
 // se deriva de SIZE_PRICES.preset según el tamaño elegido en coleccion.html.
 const PRESETS = [
-  { id: "origem", name: "Origem", copy: "Inspirado en lo esencial: cálido y atemporal, perfecto para tu primer Priori.", desc: "Cuero marrón · elástico rosa bebé · dije de cisne · 3 cuadernos Priori", leather: "marron", elastic: "rosa-bebe" },
-  { id: "serena", name: "Serena", copy: "Delicado y femenino, pensado para acompañar tu corazón y tu creatividad.", desc: "Cuero rosa claro · elástico rosa bebé · dije de cisne · 3 cuadernos Priori, hoja blanca", leather: "rosa-claro", elastic: "rosa-bebe" },
-  { id: "luna", name: "Luna", copy: "Elegante y sereno, para dejar espacio a nuevas ideas.", desc: "Cuero azul marino · elástico azul claro · dije de cisne · 3 cuadernos Priori", leather: "azul-marino", elastic: "azul-bebe" },
-  { id: "aura", name: "Aura", copy: "Intenso y sofisticado, con un toque de personalidad.", desc: "Cuero marsala · elástico rosa bebé · dije de cisne · 3 cuadernos Priori", leather: "marsala", elastic: "rosa-bebe" },
+  { id: "origem", name: "Origem", copy: "Inspirado en lo esencial: cálido y atemporal, perfecto para tu primer Priori.", desc: "Cuero marrón · elástico rosa bebé · dije de cisne · 3 cuadernos Priori · pauta lisa", leather: "marron", elastic: "rosa-bebe" },
+  { id: "serena", name: "Serena", copy: "Delicado y femenino, pensado para acompañar tu corazón y tu creatividad.", desc: "Cuero rosa claro · elástico rosa bebé · dije de cisne · 3 cuadernos Priori · pauta lisa", leather: "rosa-claro", elastic: "rosa-bebe" },
+  { id: "luna", name: "Luna", copy: "Elegante y sereno, para dejar espacio a nuevas ideas.", desc: "Cuero azul marino · elástico azul claro · dije de cisne · 3 cuadernos Priori · pauta lisa", leather: "azul-marino", elastic: "azul-bebe" },
+  { id: "aura", name: "Aura", copy: "Intenso y sofisticado, con un toque de personalidad.", desc: "Cuero marsala · elástico rosa bebé · dije de cisne · 3 cuadernos Priori · pauta lisa", leather: "marsala", elastic: "rosa-bebe" },
 ];
 
 // Refil extra: 3 productos con cantidad seleccionable, precio distinto según el
 // flujo (colección lista vs. personalizado desde cero) — así lo pidió la clienta.
 const REFILL_EXTRAS = {
   preset: [
-    { id: "rajado-a5", name: "Refil extra · hoja rayada (A5)", unitPrice: 7000, size: "A5", colors: COVERS_REFILL_A5, photos: 6 },
-    { id: "liso-a5-dorado", name: "Refil extra · hoja lisa, negro con detalle dorado (A5)", unitPrice: 7000, size: "A5", fixedColorLabel: "Negro con detalle en dorado exclusivo de la marca.", photos: 1 },
-    { id: "a6", name: "Refil extra (A6) · lisa o rayada", unitPrice: 6000, size: "A6", colors: COVERS_REFILL_A6, photos: 4 },
+    { id: "rajado-a5", name: "Refil extra · hoja rayada (A5)", unitPrice: 7000, size: "A5", colors: COVERS_REFILL_A5, pauta: "rayada", photos: 6 },
+    { id: "liso-a5-dorado", name: "Refil extra · hoja lisa, negro con detalle dorado (A5)", unitPrice: 7000, size: "A5", fixedColorLabel: "Negro con detalle en dorado exclusivo de la marca.", pauta: "lisa", photos: 1 },
+    { id: "a6", name: "Refil extra (A6) · lisa o rayada", unitPrice: 6000, size: "A6", colors: COVERS_REFILL_A6, pautaOptions: PAUTAS_REFILL, photos: 4 },
   ],
   custom: [
-    { id: "rajado-a5", name: "Refil extra · hoja rayada (A5)", unitPrice: 8000, size: "A5", colors: COVERS_REFILL_A5, photos: 6 },
-    { id: "liso-a5-dorado", name: "Refil extra · hoja lisa, negro con detalle dorado (A5)", unitPrice: 8000, size: "A5", fixedColorLabel: "Negro con detalle en dorado exclusivo de la marca.", photos: 1 },
-    { id: "a6", name: "Refil extra (A6) · lisa o rayada", unitPrice: 6000, size: "A6", colors: COVERS_REFILL_A6, photos: 4 },
+    { id: "rajado-a5", name: "Refil extra · hoja rayada (A5)", unitPrice: 7000, size: "A5", colors: COVERS_REFILL_A5, pauta: "rayada", photos: 6 },
+    { id: "liso-a5-dorado", name: "Refil extra · hoja lisa, negro con detalle dorado (A5)", unitPrice: 7000, size: "A5", fixedColorLabel: "Negro con detalle en dorado exclusivo de la marca.", pauta: "lisa", photos: 1 },
+    { id: "a6", name: "Refil extra (A6) · lisa o rayada", unitPrice: 6000, size: "A6", colors: COVERS_REFILL_A6, pautaOptions: PAUTAS_REFILL, photos: 4 },
   ],
 };
-
-const GIFT_DISCOUNT = 0.35; // 35% off en el segundo journal (mismo tamaño y pauta)
 
 function byId(list, id) { return list.find(x => x.id === id); }

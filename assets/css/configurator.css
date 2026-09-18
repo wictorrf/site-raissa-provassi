@@ -69,24 +69,32 @@
 .charm-name{ font-size:.85rem; }
 .charm-chip .chip-price{ font-size:.72rem; }
 
-.addon-card{ display:flex; align-items:flex-start; gap:16px; border:1px solid var(--line); border-radius:var(--r-sm); padding:18px 20px; margin-bottom:14px; cursor:pointer; }
+.addon-card{ display:flex; align-items:flex-start; gap:16px; border:1px solid var(--line); border-radius:var(--r-sm); padding:18px 20px; margin-bottom:14px; }
 .addon-card:last-child{ margin-bottom:0; }
-.addon-card:hover{ border-color:var(--couro); }
-.addon-card.selected{ border-color:var(--couro); background:var(--card); }
-.addon-check{ width:20px; height:20px; border-radius:5px; border:1px solid var(--line); flex:none; margin-top:2px; display:flex; align-items:center; justify-content:center; font-size:.7rem; color:#fff; }
-.addon-card.selected .addon-check{ background:var(--couro); border-color:var(--couro); }
-.addon-body{ flex:1; }
 .addon-top{ display:flex; justify-content:space-between; gap:12px; align-items:baseline; }
 .addon-top strong{ font-weight:700; }
 .addon-price{ white-space:nowrap; font-size:.9rem; }
-.addon-price .was{ text-decoration:line-through; color:var(--muted); margin-right:6px; font-size:.85em; }
-.addon-body p{ margin:.35em 0 0; font-size:.85rem; color:var(--muted); }
 
-/* refil extra: no es un card clicable entero (tiene controles propios adentro) */
-.refill-extra-card{ cursor:default; flex-direction:column; }
-.refill-extra-card .addon-body{ width:100%; }
+/* refil extra: no es un card clicable entero (tiene controles propios adentro).
+   2 columnas: contenido a la izquierda, carrusel de fotos a la derecha. */
+.refill-extra-card{ cursor:default; align-items:stretch; gap:20px; }
+.refill-extra-card .refill-extra-body{ flex:1; min-width:0; }
 .refill-extra-card .nb-row{ margin-top:14px; margin-bottom:0; }
 .addon-fixed-color{ margin:14px 0 0; font-size:.82rem; color:var(--muted); font-style:italic; }
+
+.refill-extra-photos{ flex:none; width:190px; display:flex; flex-direction:column; gap:10px; }
+.photo-carousel-slide{ aspect-ratio:4/3; }
+.photo-carousel-nav{ display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.pc-arrow{ width:28px; height:28px; border-radius:50%; border:1px solid var(--line); background:#fff; color:var(--couro); font-size:1rem; line-height:1; display:flex; align-items:center; justify-content:center; cursor:pointer; flex:none; transition:border-color .15s, background .15s; }
+.pc-arrow:hover:not(:disabled){ border-color:var(--couro); background:var(--card); }
+.pc-arrow:disabled{ opacity:.35; cursor:not-allowed; }
+.pc-dots{ display:flex; align-items:center; gap:5px; }
+.pc-dot{ width:6px; height:6px; border-radius:50%; background:var(--line); flex:none; }
+.pc-dot.active{ background:var(--couro); }
+@media (max-width:640px){
+  .refill-extra-card{ flex-direction:column; }
+  .refill-extra-photos{ width:100%; }
+}
 
 /* seletor de cantidad (dijes, refis extra) */
 .qty-stepper{ display:inline-flex; align-items:center; gap:10px; }
@@ -99,11 +107,6 @@
 .charm-chip{ flex-wrap:wrap; }
 .charm-chip .qty-stepper.mini{ margin-left:auto; }
 
-/* fotos de referencia en fila (placeholders pequeños, mientras no llegan las fotos reales) */
-.photo-slots-row{ display:flex; flex-wrap:wrap; gap:8px; }
-.mini-photo-slot{ width:56px; height:56px; flex:none; }
-.mini-photo-slot span{ font-size:.6rem; padding:0 4px; }
-
 /* tamaño por cuaderno (Reposición) */
 .nb-size-row{ display:flex; gap:10px; flex-wrap:wrap; }
 .nb-size-option{ border:1px solid var(--line); border-radius:var(--r-sm); padding:10px 16px; cursor:pointer; display:flex; align-items:center; gap:10px; font-size:.85rem; transition:all .2s; }
@@ -112,8 +115,17 @@
 .nb-size-price{ color:var(--muted); font-size:.82rem; }
 .nb-size-option.selected .nb-size-price{ color:var(--couro); }
 
-/* textarea de notas dentro del configurador (Detalles extra) */
-.field-note{ margin-top:18px; }
+/* Detalles extra: tarjetas con foto cuadrada arriba, nombre y precio abajo
+   (en vez del chip horizontal), para que la foto se vea grande y clara. */
+.tile-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(112px, 1fr)); gap:14px; }
+.tile-card{ border:1px solid var(--line); border-radius:var(--r-sm); padding:10px; cursor:pointer; text-align:center; transition:all .2s; }
+.tile-card:hover{ border-color:var(--couro); }
+.tile-card.selected{ border-color:var(--couro); background:var(--card); box-shadow:inset 0 0 0 1px var(--couro); }
+.tile-photo{ aspect-ratio:1/1; margin-bottom:10px; }
+.tile-photo span{ font-size:.68rem; }
+.tile-name{ font-size:.82rem; font-weight:600; line-height:1.3; }
+.tile-card.selected .tile-name{ color:var(--couro); }
+.tile-price{ font-size:.76rem; color:var(--muted); margin-top:2px; }
 
 .preset-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:22px; }
 @media (max-width:700px){ .preset-grid{ grid-template-columns:1fr; } }

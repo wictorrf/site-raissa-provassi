@@ -44,24 +44,30 @@ function renderFooter() {
       <div class="foot-grid">
         <div class="foot-brand">
           <img class="flogo" src="assets/img/logo.png" alt="Priori">
-        </div>
-        <div class="foot-col">
-          <h5>Políticas</h5>
-          <a href="privacidad.html">Política de privacidad</a>
-        </div>
-        <div class="foot-col">
-          <h5>Links útiles</h5>
-          <a href="sobre.html">Quiénes somos</a>
-          <a href="https://wa.me/${WHATSAPP_NUMBER}" target="_blank" rel="noopener">Hablanos</a>
-          <a href="preguntas.html">Preguntas frecuentes</a>
-        </div>
-        <div class="foot-col">
-          <h5>Seguinos</h5>
-          <div class="foot-social">
-            <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener" aria-label="Instagram">${INSTAGRAM_ICON_SVG}</a>
-            <a href="https://wa.me/${WHATSAPP_NUMBER}" target="_blank" rel="noopener" aria-label="WhatsApp">${WPP_ICON_SVG}</a>
+          <div class="foot-brand-text">
+            <p class="foot-brand-name">Priori</p>
+            <p class="foot-brand-tag">Hecho a mano, pensado para durar.</p>
           </div>
-          <a class="foot-email" href="${CONTACT_EMAIL ? "mailto:" + CONTACT_EMAIL : "#"}">${CONTACT_EMAIL || "[agregar e-mail]"}</a>
+        </div>
+        <div class="foot-cols">
+          <div class="foot-col">
+            <h5>Explore</h5>
+            <a href="sobre.html">Quiénes somos</a>
+            <a href="preguntas.html">Preguntas frecuentes</a>
+          </div>
+          <div class="foot-col">
+            <h5>Ayuda</h5>
+            <a href="https://wa.me/${WHATSAPP_NUMBER}" target="_blank" rel="noopener">Contáctanos</a>
+            <a href="privacidad.html">Política de privacidad</a>
+          </div>
+          <div class="foot-col">
+            <h5>Síguenos</h5>
+            <div class="foot-social">
+              <a href="${INSTAGRAM_URL}" target="_blank" rel="noopener" aria-label="Instagram">${INSTAGRAM_ICON_SVG}</a>
+              <a href="https://wa.me/${WHATSAPP_NUMBER}" target="_blank" rel="noopener" aria-label="WhatsApp">${WPP_ICON_SVG}</a>
+            </div>
+            <a class="foot-email" href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>
+          </div>
         </div>
       </div>
       <div class="foot-bottom">

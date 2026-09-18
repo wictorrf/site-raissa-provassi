@@ -18,10 +18,10 @@
     engrave: { on: false, text: "" },
     charms: [],
     accessories: [],
-    accessoryNotes: "",
     refill: {},
     refillColors: {},
-    addons: { gift: false },
+    refillPauta: {},
+    refillPhotoIndex: {},
     previewSide: "fuera",
   });
 
@@ -29,7 +29,7 @@
 
   function persist() { saveLiveState(FLOW, c); }
 
-  function baseForGift() {
+  function baseTotal() {
     const size = byId(sizesFor(SIZE_FLOW), c.size);
     let base = size.price;
     c.notebooks.forEach(nb => { if (nb.pauta === "punteada") base += PONTILHADO_EXTRA; });
@@ -37,12 +37,11 @@
   }
 
   function total() {
-    let t = baseForGift(); // tamaño + extra por pauta punteada
+    let t = baseTotal(); // tamaño + extra por pauta punteada
     if (c.engrave.on) t += 4000;
     t += calcCharmsTotal(c.charms);
     c.accessories.forEach(id => { t += byId(ACCESSORIES, id).price; });
     t += refillExtrasTotal(SIZE_FLOW, c.refill);
-    if (c.addons.gift) t += Math.round(baseForGift() * (1 - GIFT_DISCOUNT));
     return t;
   }
 
@@ -86,11 +85,12 @@
       flow: SIZE_FLOW,
       refillQty: c.refill,
       refillColors: c.refillColors,
-      addonsState: c.addons,
-      base: baseForGift(),
+      refillPauta: c.refillPauta,
+      refillPhotoIndex: c.refillPhotoIndex,
       onRefillQtyChange: (id, n) => { c.refill[id] = n; refresh(); },
       onRefillColorChange: (id, val) => { c.refillColors[id] = val; refresh(); },
-      onToggleGift: () => { c.addons.gift = !c.addons.gift; refresh(); },
+      onRefillPautaChange: (id, val) => { c.refillPauta[id] = val; refresh(); },
+      onRefillPhotoIndexChange: (id, idx) => { c.refillPhotoIndex[id] = idx; refresh(); },
     });
   }
 
@@ -112,7 +112,6 @@
     renderChipGrid(document.getElementById("accessoryGrid"), ACCESSORIES, c.accessories, (id) => {
       toggleInArray(c.accessories, id); refresh();
     });
-    document.getElementById("accessoryNotes").value = c.accessoryNotes;
 
     renderPreview();
 
@@ -152,15 +151,14 @@
     if (c.engrave.on) lines.push({ label: "Grabado", value: c.engrave.text || "(sin texto indicado)" });
     if (c.charms.length) lines.push({ label: "Dijes", value: charmsSummary() });
     if (c.accessories.length) lines.push({ label: "Detalles extra", value: c.accessories.map(id => byId(ACCESSORIES, id).name).join(", ") });
-    if (c.accessoryNotes) lines.push({ label: "Colores/opciones de los extras", value: c.accessoryNotes });
     REFILL_EXTRAS[SIZE_FLOW].forEach(item => {
       const qty = c.refill[item.id] || 0;
       if (qty > 0) {
         const color = item.colors ? byId(item.colors, c.refillColors[item.id] || item.colors[0].id).name : item.fixedColorLabel;
-        lines.push({ label: `Agregado: ${item.name}`, value: `x${qty} · ${color}` });
+        const pauta = refillItemPautaName(item, c.refillPauta);
+        lines.push({ label: `Agregado: ${item.name}`, value: `x${qty} · ${color} · Pauta ${pauta}` });
       }
     });
-    if (c.addons.gift) lines.push({ label: "Agregado", value: `segundo journal de regalo (-${Math.round(GIFT_DISCOUNT * 100)}%)` });
 
     savePendingOrder({ flow: FLOW, lines, total: total() });
     window.location.href = "entrega.html";
@@ -182,9 +180,6 @@
     });
     document.getElementById("engraveText").addEventListener("input", (e) => {
       c.engrave.text = e.target.value; refresh();
-    });
-    document.getElementById("accessoryNotes").addEventListener("input", (e) => {
-      c.accessoryNotes = e.target.value; persist();
     });
 
     document.getElementById("custContinueBtn").addEventListener("click", goToDelivery);

@@ -44,13 +44,17 @@ function renderPautaRow(container, currentPauta, onPick, list) {
   });
 }
 
+// Detalles extra: cada opción es una tarjeta con la foto cuadrada arriba
+// (mientras no tengamos las fotos reales, un placeholder) y el nombre/precio
+// abajo, para que se vea grande y clara.
 function renderChipGrid(container, list, selectedIds, onToggle) {
   container.innerHTML = list.map(item => `
-    <div class="chip charm-chip ${selectedIds.includes(item.id) ? 'selected' : ''}" data-id="${item.id}">
-      <span class="charm-photo" data-photo-hint="foto: ${item.name}"></span>
-      <span class="charm-info"><span class="charm-name">${item.name}</span><span class="chip-price">${money(item.price)}</span></span>
+    <div class="tile-card ${selectedIds.includes(item.id) ? 'selected' : ''}" data-id="${item.id}">
+      <div class="tile-photo photo-slot" data-photo-hint="foto: ${item.name}"><span>Foto</span></div>
+      <div class="tile-name">${item.name}</div>
+      <div class="tile-price">${money(item.price)}</div>
     </div>`).join("");
-  container.querySelectorAll(".chip").forEach(el => {
+  container.querySelectorAll(".tile-card").forEach(el => {
     el.addEventListener("click", () => { onToggle(el.dataset.id); });
   });
 }
@@ -58,19 +62,29 @@ function renderChipGrid(container, list, selectedIds, onToggle) {
 // Dijes: dejamos el espacio circular pensado para la foto real de cada dije;
 // por ahora, mientras no tengamos las fotos, mostramos un emoji de referencia.
 // pickedIds trae repetidos (uno por unidad elegida) para soportar cantidad.
+// Sin seleccionar muestra el precio; al elegirlo aparece el selector de
+// cantidad (así no se ve la cantidad hasta que la clienta realmente la toca).
 function renderCharmGrid(container, list, pickedIds, onQtyChange) {
   container.innerHTML = list.map(item => {
     const qty = pickedIds.filter(id => id === item.id).length;
     return `
     <div class="chip charm-chip ${qty > 0 ? 'selected' : ''}" data-id="${item.id}">
       <span class="charm-photo">${CHARM_EMOJI[item.id] || "•"}</span>
-      <span class="charm-info"><span class="charm-name">${item.name}</span></span>
-      <div class="qty-stepper mini" data-charmqty="${item.id}"></div>
+      <span class="charm-info">
+        <span class="charm-name">${item.name}</span>
+        ${qty > 0 ? "" : `<span class="chip-price">${money(item.price)}</span>`}
+      </span>
+      ${qty > 0 ? `<div class="qty-stepper mini" data-charmqty="${item.id}"></div>` : ""}
     </div>`;
   }).join("");
   list.forEach(item => {
     const qty = pickedIds.filter(id => id === item.id).length;
-    renderQuantityStepper(container.querySelector(`[data-charmqty="${item.id}"]`), qty, (n) => onQtyChange(item.id, n));
+    const chipEl = container.querySelector(`.charm-chip[data-id="${item.id}"]`);
+    if (qty === 0) {
+      chipEl.addEventListener("click", () => onQtyChange(item.id, 1));
+    } else {
+      renderQuantityStepper(container.querySelector(`[data-charmqty="${item.id}"]`), qty, (n) => onQtyChange(item.id, n));
+    }
   });
 }
 
@@ -91,10 +105,23 @@ function renderQuantityStepper(container, qty, onChange, opts) {
   });
 }
 
-// N placeholders de foto en fila (mientras no llegan las fotos reales del producto).
-function renderPhotoSlots(container, count, hintPrefix) {
-  container.innerHTML = Array.from({ length: count }, (_, i) => `
-    <div class="photo-slot mini-photo-slot" data-photo-hint="${hintPrefix} — foto ${i + 1}/${count}"><span>Foto ${i + 1}</span></div>`).join("");
+// Carrusel de fotos de referencia: un placeholder grande navegable (‹ ›) con
+// N espacios reservados, mientras no llegan las fotos reales del producto.
+function renderPhotoCarousel(container, count, index, hintPrefix, onChange) {
+  const i = Math.min(Math.max(index || 0, 0), count - 1);
+  container.innerHTML = `
+    <div class="photo-carousel-slide photo-slot" data-photo-hint="${hintPrefix} — foto ${i + 1}/${count}"><span>Foto ${i + 1}/${count}</span></div>
+    <div class="photo-carousel-nav">
+      <button type="button" class="pc-arrow" data-dir="-1" ${count <= 1 ? "disabled" : ""} aria-label="Foto anterior">‹</button>
+      <div class="pc-dots">${Array.from({ length: count }, (_, d) => `<span class="pc-dot ${d === i ? "active" : ""}"></span>`).join("")}</div>
+      <button type="button" class="pc-arrow" data-dir="1" ${count <= 1 ? "disabled" : ""} aria-label="Foto siguiente">›</button>
+    </div>`;
+  container.querySelectorAll(".pc-arrow").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const next = (i + Number(btn.dataset.dir) + count) % count;
+      onChange(next);
+    });
+  });
 }
 
 // Bloque "Cuaderno N" (tamaño opcional + color de tapa + pauta), reutilizado por
