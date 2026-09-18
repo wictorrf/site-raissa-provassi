@@ -4,10 +4,10 @@
    reposicion.html y entrega.html.
    ============================================================ */
 
-const WHATSAPP_NUMBER = "5492236358794";
+const WHATSAPP_NUMBER = "549223548446";
 const INSTAGRAM_URL = "https://instagram.com/priori.colletion";
 const INSTAGRAM_HANDLE = "@priori.colletion";
-const CONTACT_EMAIL = ""; // pendiente: Raíssa todavía no nos pasó el e-mail de contacto
+const CONTACT_EMAIL = "hola.prioricollection@gmail.com";
 
 const money = n => "$" + Math.round(n).toLocaleString("es-AR");
 
