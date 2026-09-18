@@ -91,10 +91,23 @@ function renderQuantityStepper(container, qty, onChange, opts) {
   });
 }
 
-// N placeholders de foto en fila (mientras no llegan las fotos reales del producto).
-function renderPhotoSlots(container, count, hintPrefix) {
-  container.innerHTML = Array.from({ length: count }, (_, i) => `
-    <div class="photo-slot mini-photo-slot" data-photo-hint="${hintPrefix} — foto ${i + 1}/${count}"><span>Foto ${i + 1}</span></div>`).join("");
+// Carrusel de fotos de referencia: un placeholder grande navegable (‹ ›) con
+// N espacios reservados, mientras no llegan las fotos reales del producto.
+function renderPhotoCarousel(container, count, index, hintPrefix, onChange) {
+  const i = Math.min(Math.max(index || 0, 0), count - 1);
+  container.innerHTML = `
+    <div class="photo-carousel-slide photo-slot" data-photo-hint="${hintPrefix} — foto ${i + 1}/${count}"><span>Foto ${i + 1}/${count}</span></div>
+    <div class="photo-carousel-nav">
+      <button type="button" class="pc-arrow" data-dir="-1" ${count <= 1 ? "disabled" : ""} aria-label="Foto anterior">‹</button>
+      <div class="pc-dots">${Array.from({ length: count }, (_, d) => `<span class="pc-dot ${d === i ? "active" : ""}"></span>`).join("")}</div>
+      <button type="button" class="pc-arrow" data-dir="1" ${count <= 1 ? "disabled" : ""} aria-label="Foto siguiente">›</button>
+    </div>`;
+  container.querySelectorAll(".pc-arrow").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const next = (i + Number(btn.dataset.dir) + count) % count;
+      onChange(next);
+    });
+  });
 }
 
 // Bloque "Cuaderno N" (tamaño opcional + color de tapa + pauta), reutilizado por

@@ -7,8 +7,10 @@
 // flow = "preset" (coleccion.html) | "custom" (personalizar.html) — cada uno
 // usa su propia lista de precios en REFILL_EXTRAS (data.js).
 // refillQty = { [itemId]: cantidad }, refillColors = { [itemId]: colorId }
+// refillPauta = { [itemId]: pautaId } (solo se usa en items con pautaOptions)
+// refillPhotoIndex = { [itemId]: índice del carrusel de fotos }
 // addonsState = { gift: bool }, base = precio del journal sin extras (para el 35% off)
-function renderAddonsBlock(container, { flow, refillQty, refillColors, addonsState, base, onRefillQtyChange, onRefillColorChange, onToggleGift }) {
+function renderAddonsBlock(container, { flow, refillQty, refillColors, refillPauta, refillPhotoIndex, addonsState, base, onRefillQtyChange, onRefillColorChange, onRefillPautaChange, onRefillPhotoIndexChange, onToggleGift }) {
   const extras = REFILL_EXTRAS[flow];
   const giftPrice = Math.round(base * (1 - GIFT_DISCOUNT));
 
@@ -21,7 +23,7 @@ function renderAddonsBlock(container, { flow, refillQty, refillColors, addonsSta
     }
     return `
       <div class="addon-card refill-extra-card">
-        <div class="addon-body">
+        <div class="refill-extra-body">
           <div class="addon-top"><strong>${item.name}</strong><span class="addon-price">${money(item.unitPrice)} c/u</span></div>
           <div class="nb-row addon-qty-row">
             <span class="nb-label">Cantidad</span>
@@ -29,10 +31,11 @@ function renderAddonsBlock(container, { flow, refillQty, refillColors, addonsSta
           </div>
           ${colorMarkup}
           <div class="nb-row">
-            <span class="nb-label">Fotos de referencia</span>
-            <div class="photo-slots-row" data-refillphotos="${item.id}"></div>
+            <span class="nb-label">Pauta</span>
+            <div class="pauta-row" data-refillpauta="${item.id}"></div>
           </div>
         </div>
+        <div class="refill-extra-photos" data-refillphotos="${item.id}"></div>
       </div>`;
   }).join("");
 
@@ -50,10 +53,23 @@ function renderAddonsBlock(container, { flow, refillQty, refillColors, addonsSta
     if (item.colors) {
       renderSwatchRow(container.querySelector(`[data-refillcolor="${item.id}"]`), item.colors, refillColors[item.id] || item.colors[0].id, (val) => onRefillColorChange(item.id, val));
     }
-    renderPhotoSlots(container.querySelector(`[data-refillphotos="${item.id}"]`), item.photos, item.name);
+    const pautaContainer = container.querySelector(`[data-refillpauta="${item.id}"]`);
+    if (item.pautaOptions) {
+      renderPautaRow(pautaContainer, refillPauta[item.id] || item.pautaOptions[0].id, (val) => onRefillPautaChange(item.id, val), item.pautaOptions);
+    } else {
+      renderPautaRow(pautaContainer, item.pauta, () => {}, [byId(PAUTAS, item.pauta)]);
+    }
+    renderPhotoCarousel(container.querySelector(`[data-refillphotos="${item.id}"]`), item.photos, refillPhotoIndex[item.id] || 0, item.name, (idx) => onRefillPhotoIndexChange(item.id, idx));
   });
 
   container.querySelector('[data-id="gift"]').addEventListener("click", onToggleGift);
+}
+
+// Resuelve la pauta efectiva de un ítem de refil extra: fija (item.pauta) o
+// la que la clienta eligió (refillPauta) cuando el item tiene pautaOptions.
+function refillItemPautaName(item, refillPauta) {
+  const id = item.pautaOptions ? (refillPauta[item.id] || item.pautaOptions[0].id) : item.pauta;
+  return byId(PAUTAS, id).name;
 }
 
 function refillExtrasTotal(flow, refillQty) {

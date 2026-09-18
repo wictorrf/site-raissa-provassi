@@ -19,6 +19,8 @@
     addons: { gift: false },
     refill: {},
     refillColors: {},
+    refillPauta: {},
+    refillPhotoIndex: {},
     previewSide: "fuera",
   });
 
@@ -80,10 +82,14 @@
       flow: SIZE_FLOW,
       refillQty: c.refill,
       refillColors: c.refillColors,
+      refillPauta: c.refillPauta,
+      refillPhotoIndex: c.refillPhotoIndex,
       addonsState: c.addons,
       base: baseTotal(),
       onRefillQtyChange: (id, n) => { c.refill[id] = n; refresh(); },
       onRefillColorChange: (id, val) => { c.refillColors[id] = val; refresh(); },
+      onRefillPautaChange: (id, val) => { c.refillPauta[id] = val; refresh(); },
+      onRefillPhotoIndexChange: (id, idx) => { c.refillPhotoIndex[id] = idx; refresh(); },
       onToggleGift: () => { c.addons.gift = !c.addons.gift; refresh(); },
     });
   }
@@ -130,7 +136,8 @@
       const qty = c.refill[item.id] || 0;
       if (qty > 0) {
         const color = item.colors ? byId(item.colors, c.refillColors[item.id] || item.colors[0].id).name : item.fixedColorLabel;
-        lines.push({ label: `Agregado: ${item.name}`, value: `x${qty} · ${color}` });
+        const pauta = refillItemPautaName(item, c.refillPauta);
+        lines.push({ label: `Agregado: ${item.name}`, value: `x${qty} · ${color} · Pauta ${pauta}` });
       }
     });
     if (c.addons.gift) lines.push({ label: "Agregado", value: `segundo journal de regalo (-${Math.round(GIFT_DISCOUNT * 100)}%)` });

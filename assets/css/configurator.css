@@ -82,11 +82,26 @@
 .addon-price .was{ text-decoration:line-through; color:var(--muted); margin-right:6px; font-size:.85em; }
 .addon-body p{ margin:.35em 0 0; font-size:.85rem; color:var(--muted); }
 
-/* refil extra: no es un card clicable entero (tiene controles propios adentro) */
-.refill-extra-card{ cursor:default; flex-direction:column; }
-.refill-extra-card .addon-body{ width:100%; }
+/* refil extra: no es un card clicable entero (tiene controles propios adentro).
+   2 columnas: contenido a la izquierda, carrusel de fotos a la derecha. */
+.refill-extra-card{ cursor:default; align-items:stretch; gap:20px; }
+.refill-extra-card .refill-extra-body{ flex:1; min-width:0; }
 .refill-extra-card .nb-row{ margin-top:14px; margin-bottom:0; }
 .addon-fixed-color{ margin:14px 0 0; font-size:.82rem; color:var(--muted); font-style:italic; }
+
+.refill-extra-photos{ flex:none; width:190px; display:flex; flex-direction:column; gap:10px; }
+.photo-carousel-slide{ aspect-ratio:4/3; }
+.photo-carousel-nav{ display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.pc-arrow{ width:28px; height:28px; border-radius:50%; border:1px solid var(--line); background:#fff; color:var(--couro); font-size:1rem; line-height:1; display:flex; align-items:center; justify-content:center; cursor:pointer; flex:none; transition:border-color .15s, background .15s; }
+.pc-arrow:hover:not(:disabled){ border-color:var(--couro); background:var(--card); }
+.pc-arrow:disabled{ opacity:.35; cursor:not-allowed; }
+.pc-dots{ display:flex; align-items:center; gap:5px; }
+.pc-dot{ width:6px; height:6px; border-radius:50%; background:var(--line); flex:none; }
+.pc-dot.active{ background:var(--couro); }
+@media (max-width:640px){
+  .refill-extra-card{ flex-direction:column; }
+  .refill-extra-photos{ width:100%; }
+}
 
 /* seletor de cantidad (dijes, refis extra) */
 .qty-stepper{ display:inline-flex; align-items:center; gap:10px; }
@@ -98,11 +113,6 @@
 .qty-stepper.mini .qty-btn{ width:22px; height:22px; font-size:.85rem; }
 .charm-chip{ flex-wrap:wrap; }
 .charm-chip .qty-stepper.mini{ margin-left:auto; }
-
-/* fotos de referencia en fila (placeholders pequeños, mientras no llegan las fotos reales) */
-.photo-slots-row{ display:flex; flex-wrap:wrap; gap:8px; }
-.mini-photo-slot{ width:56px; height:56px; flex:none; }
-.mini-photo-slot span{ font-size:.6rem; padding:0 4px; }
 
 /* tamaño por cuaderno (Reposición) */
 .nb-size-row{ display:flex; gap:10px; flex-wrap:wrap; }
