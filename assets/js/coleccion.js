@@ -47,7 +47,7 @@
       const lc = byId(LEATHER_COLORS, p.leather), ec = byId(ELASTIC_COLORS, p.elastic);
       return `<div class="preset-card ${p.id === c.preset ? 'selected' : ''}" data-id="${p.id}">
         <div class="preset-photo photo-slot" data-photo-hint="foto: modelo ${p.name}" style="background:linear-gradient(150deg, ${lc.hex}22, ${ec.hex}33);">
-          ${journalIconSVG(lc.hex, ec.hex, 74)}
+          <span>Foto</span>
         </div>
         <div class="preset-card-body">
           <div>

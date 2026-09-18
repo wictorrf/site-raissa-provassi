@@ -122,10 +122,10 @@ const ACCESSORIES = [
 // Los 4 modelos de la colección lista. El precio NO se guarda acá:
 // se deriva de SIZE_PRICES.preset según el tamaño elegido en coleccion.html.
 const PRESETS = [
-  { id: "origem", name: "Origem", copy: "Inspirado en lo esencial: cálido y atemporal, perfecto para tu primer Priori.", desc: "Cuero marrón · elástico rosa bebé · dije de cisne · 3 cuadernos Priori", leather: "marron", elastic: "rosa-bebe" },
-  { id: "serena", name: "Serena", copy: "Delicado y femenino, pensado para acompañar tu corazón y tu creatividad.", desc: "Cuero rosa claro · elástico rosa bebé · dije de cisne · 3 cuadernos Priori, hoja blanca", leather: "rosa-claro", elastic: "rosa-bebe" },
-  { id: "luna", name: "Luna", copy: "Elegante y sereno, para dejar espacio a nuevas ideas.", desc: "Cuero azul marino · elástico azul claro · dije de cisne · 3 cuadernos Priori", leather: "azul-marino", elastic: "azul-bebe" },
-  { id: "aura", name: "Aura", copy: "Intenso y sofisticado, con un toque de personalidad.", desc: "Cuero marsala · elástico rosa bebé · dije de cisne · 3 cuadernos Priori", leather: "marsala", elastic: "rosa-bebe" },
+  { id: "origem", name: "Origem", copy: "Inspirado en lo esencial: cálido y atemporal, perfecto para tu primer Priori.", desc: "Cuero marrón · elástico rosa bebé · dije de cisne · 3 cuadernos Priori · pauta lisa", leather: "marron", elastic: "rosa-bebe" },
+  { id: "serena", name: "Serena", copy: "Delicado y femenino, pensado para acompañar tu corazón y tu creatividad.", desc: "Cuero rosa claro · elástico rosa bebé · dije de cisne · 3 cuadernos Priori · pauta lisa", leather: "rosa-claro", elastic: "rosa-bebe" },
+  { id: "luna", name: "Luna", copy: "Elegante y sereno, para dejar espacio a nuevas ideas.", desc: "Cuero azul marino · elástico azul claro · dije de cisne · 3 cuadernos Priori · pauta lisa", leather: "azul-marino", elastic: "azul-bebe" },
+  { id: "aura", name: "Aura", copy: "Intenso y sofisticado, con un toque de personalidad.", desc: "Cuero marsala · elástico rosa bebé · dije de cisne · 3 cuadernos Priori · pauta lisa", leather: "marsala", elastic: "rosa-bebe" },
 ];
 
 // Refil extra: 3 productos con cantidad seleccionable, precio distinto según el
