@@ -15,6 +15,8 @@
   --card-2:#E8DFD3;
   --muted:#6B5D4D;
   --marsala:#7d2c3a;
+  --rosa-continuar:#A73B54;
+  --rosa-continuar-2:#B64A63;
   --line:#e4dccf;
   --gold:#d8a24a;
   --wpp:#25a35a;
@@ -81,6 +83,8 @@ input,textarea,select{ font-family:inherit; font-size:1rem; }
 }
 .btn-couro{ background:var(--couro); color:#fff; }
 .btn-couro:hover{ background:var(--couro-2); transform:translateY(-1px); }
+.btn-continue{ background:var(--rosa-continuar); color:#fff; }
+.btn-continue:hover{ background:var(--rosa-continuar-2); transform:translateY(-1px); }
 .btn-ghost{ background:#fff; color:var(--couro); border:1.5px solid var(--line); }
 .btn-ghost:hover{ border-color:var(--couro); }
 .btn-ghost.on-dark{ background:transparent; color:#fff; border-color:rgba(255,255,255,.4); }
