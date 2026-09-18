@@ -106,7 +106,7 @@ const CHARM_EMOJI = {
 };
 // pickedIds = ids elegidos en el orden en que se sumaron (con repetición = cantidad).
 function calcCharmsTotal(pickedIds) {
-  return pickedIds.reduce((total, id, i) => i === 0 ? total : total + (id === "cisne" ? 1500 : 600), 0);
+  return pickedIds.reduce((total, id, i) => i === 0 ? total : total + byId(CHARMS, id).price, 0);
 }
 
 const ACCESSORIES = [

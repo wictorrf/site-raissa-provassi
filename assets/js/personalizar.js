@@ -18,7 +18,6 @@
     engrave: { on: false, text: "" },
     charms: [],
     accessories: [],
-    accessoryNotes: "",
     refill: {},
     refillColors: {},
     refillPauta: {},
@@ -113,7 +112,6 @@
     renderChipGrid(document.getElementById("accessoryGrid"), ACCESSORIES, c.accessories, (id) => {
       toggleInArray(c.accessories, id); refresh();
     });
-    document.getElementById("accessoryNotes").value = c.accessoryNotes;
 
     renderPreview();
 
@@ -153,7 +151,6 @@
     if (c.engrave.on) lines.push({ label: "Grabado", value: c.engrave.text || "(sin texto indicado)" });
     if (c.charms.length) lines.push({ label: "Dijes", value: charmsSummary() });
     if (c.accessories.length) lines.push({ label: "Detalles extra", value: c.accessories.map(id => byId(ACCESSORIES, id).name).join(", ") });
-    if (c.accessoryNotes) lines.push({ label: "Colores/opciones de los extras", value: c.accessoryNotes });
     REFILL_EXTRAS[SIZE_FLOW].forEach(item => {
       const qty = c.refill[item.id] || 0;
       if (qty > 0) {
@@ -183,9 +180,6 @@
     });
     document.getElementById("engraveText").addEventListener("input", (e) => {
       c.engrave.text = e.target.value; refresh();
-    });
-    document.getElementById("accessoryNotes").addEventListener("input", (e) => {
-      c.accessoryNotes = e.target.value; persist();
     });
 
     document.getElementById("custContinueBtn").addEventListener("click", goToDelivery);
