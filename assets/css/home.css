@@ -22,26 +22,14 @@
 .hero-ctas{ position:relative; z-index:2; display:flex; gap:16px; flex-wrap:wrap; justify-content:center; }
 .hero-mobile-copy{ display:none; }
 
-/* En mobile, la franja "cover" recorta el ancho de la foto tanto que el texto horneado
-   en la imagen queda cortado (el título no entra). En vez de perseguir un recorte que
-   nunca calza en todos los anchos, mostramos una copia real en HTML (con la tipografía
-   del sitio) y usamos la foto solo como fondo atmosférico, sin depender de su texto. */
+/* En mobile usamos una foto propia ("banner1-mobile"), compuesta en formato
+   retrato con el mismo texto/logo horneados — así el recorte "cover" no
+   necesita casi nada de crop (la proporción ya es la del teléfono) y no hace
+   falta la copia en HTML de respaldo. */
 @media (max-width:560px){
   .hero{ min-height:90vh; padding-bottom:8vh; }
   .hero::after{ background:linear-gradient(180deg, rgba(20,16,10,.24) 0%, rgba(18,14,9,.3) 45%, rgba(15,12,8,.72) 100%); }
-  /* la nueva foto tiene el texto horneado más ancho que el margen limpio a
-     cada lado, así que cualquier recorte "cover" deja asomar una letra —
-     105% empuja el recorte apenas más allá del borde derecho de la imagen
-     (mostrando el color de respaldo, ya afinado al tono de la foto) para
-     que ninguna letra quede a medias. */
-  .hero-bg{ background-position:105% 40%; }
-  .hero-mobile-copy{ display:block; position:relative; z-index:2; text-align:center; max-width:340px; margin:0 auto 22px; }
-  .hero-mobile-copy .eyebrow{ color:rgba(255,255,255,.85); }
-  .hero-mobile-copy .eyebrow::before{ display:none; }
-  .hmc-title{
-    font-weight:800; font-size:1.7rem; line-height:1.25; color:#fff; margin:.35em 0 0;
-    text-shadow:0 2px 14px rgba(0,0,0,.35);
-  }
+  .hero-bg{ background-image:url('../img/hero-mobile.webp'); background-position:50% 0%; }
   .hero-ctas{ flex-direction:column; width:100%; padding:0 20px; }
 }
 
