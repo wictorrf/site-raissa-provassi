@@ -118,8 +118,8 @@ const ACCESSORIES = [
   { id: "presilla", name: "Presilla metálica", price: 3000, photos: ["assets/img/presilla-1.jpg", "assets/img/presilla-2.jpg"] },
   { id: "lazos", name: "Lazos o rendas", price: 2000, photos: ["assets/img/lazos-1.jpg", "assets/img/lazos-2.jpg"] },
   { id: "broche-hp", name: "Broche para tapa de cuero - Harry Potter", price: 5000, photos: ["assets/img/broche-hp-1.jpg"] },
-  { id: "clip-metalico", name: "Clip metálico", price: 300, photos: 1 },
-  { id: "broche-mariposa", name: "Broche mariposa elegante", price: 3000, photos: 1 },
+  { id: "clip-metalico", name: "Clip metálico", price: 300, photos: ["assets/img/clip-metalico-1.jpg"] },
+  { id: "broche-mariposa", name: "Broche mariposa elegante", price: 3000, photos: ["assets/img/broche-mariposa-1.jpg"] },
 ];
 
 // Los 4 modelos de la colección lista. El precio NO se guarda acá:
