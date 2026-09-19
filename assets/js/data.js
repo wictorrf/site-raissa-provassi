@@ -132,12 +132,12 @@ const PRESETS = [
 // flujo (colección lista vs. personalizado desde cero) — así lo pidió la clienta.
 const REFILL_EXTRAS = {
   preset: [
-    { id: "rajado-a5", name: "Refil extra · hoja rayada (A5)", unitPrice: 7000, size: "A5", colors: COVERS_REFILL_A5, pauta: "rayada", photos: 6 },
+    { id: "rajado-a5", name: "Soft Living Collection", unitPrice: 7000, size: "A5", colors: COVERS_REFILL_A5, pauta: "rayada", photos: ["assets/img/soft-living-1.jpg", "assets/img/soft-living-2.jpg", "assets/img/soft-living-3.jpg", "assets/img/soft-living-4.jpg", null, null] },
     { id: "liso-a5-dorado", name: "Refil extra · hoja lisa, negro con detalle dorado (A5)", unitPrice: 7000, size: "A5", fixedColorLabel: "Negro con detalle en dorado exclusivo de la marca.", pauta: "lisa", photos: 1 },
     { id: "a6", name: "Refil extra (A6) · lisa o rayada", unitPrice: 6000, size: "A6", colors: COVERS_REFILL_A6, pautaOptions: PAUTAS_REFILL, photos: 4 },
   ],
   custom: [
-    { id: "rajado-a5", name: "Refil extra · hoja rayada (A5)", unitPrice: 7000, size: "A5", colors: COVERS_REFILL_A5, pauta: "rayada", photos: 6 },
+    { id: "rajado-a5", name: "Soft Living Collection", unitPrice: 7000, size: "A5", colors: COVERS_REFILL_A5, pauta: "rayada", photos: ["assets/img/soft-living-1.jpg", "assets/img/soft-living-2.jpg", "assets/img/soft-living-3.jpg", "assets/img/soft-living-4.jpg", null, null] },
     { id: "liso-a5-dorado", name: "Refil extra · hoja lisa, negro con detalle dorado (A5)", unitPrice: 7000, size: "A5", fixedColorLabel: "Negro con detalle en dorado exclusivo de la marca.", pauta: "lisa", photos: 1 },
     { id: "a6", name: "Refil extra (A6) · lisa o rayada", unitPrice: 6000, size: "A6", colors: COVERS_REFILL_A6, pautaOptions: PAUTAS_REFILL, photos: 4 },
   ],
