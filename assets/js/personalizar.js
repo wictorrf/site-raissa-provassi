@@ -18,6 +18,7 @@
     engrave: { on: false, text: "" },
     charms: [],
     accessories: [],
+    accessoryPhotoIndex: {},
     refill: {},
     refillColors: {},
     refillPauta: {},
@@ -109,9 +110,9 @@
     document.getElementById("engraveText").value = c.engrave.text;
 
     renderCharmGrid(document.getElementById("charmGrid"), CHARMS, c.charms, setCharmQty);
-    renderChipGrid(document.getElementById("accessoryGrid"), ACCESSORIES, c.accessories, (id) => {
+    renderChipGrid(document.getElementById("accessoryGrid"), ACCESSORIES, c.accessories, c.accessoryPhotoIndex, (id) => {
       toggleInArray(c.accessories, id); refresh();
-    });
+    }, (id, idx) => { c.accessoryPhotoIndex[id] = idx; refresh(); });
 
     renderPreview();
 

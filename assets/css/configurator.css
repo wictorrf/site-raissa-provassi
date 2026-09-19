@@ -119,13 +119,17 @@ img.photo-carousel-slide{ width:100%; object-fit:cover; display:block; }
 .nb-size-price{ color:var(--muted); font-size:.82rem; }
 .nb-size-option.selected .nb-size-price{ color:var(--couro); }
 
-/* Detalles extra: tarjetas con foto cuadrada arriba, nombre y precio abajo
-   (en vez del chip horizontal), para que la foto se vea grande y clara. */
-.tile-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(112px, 1fr)); gap:14px; }
+/* Detalles extra: tarjetas con carrusel de fotos arriba (varias opciones de
+   diseño por ítem), nombre y precio abajo, para que la foto se vea grande y clara. */
+.tile-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:14px; }
 .tile-card{ border:1px solid var(--line); border-radius:var(--r-sm); padding:10px; cursor:pointer; text-align:center; transition:all .2s; }
 .tile-card:hover{ border-color:var(--couro); }
 .tile-card.selected{ border-color:var(--couro); background:var(--card); box-shadow:inset 0 0 0 1px var(--couro); }
-.tile-photo{ aspect-ratio:1/1; margin-bottom:10px; }
+.tile-photo{ width:100%; display:flex; flex-direction:column; gap:6px; margin-bottom:10px; }
+.tile-photo .photo-carousel-slide{ aspect-ratio:1/1; border-radius:calc(var(--r-sm) - 2px); }
+/* fotos de referencia de producto (fondo blanco, proporciones distintas entre
+   sí) — se contienen enteras en el cuadro en vez de recortarse como "cover". */
+.tile-photo img.photo-carousel-slide{ object-fit:contain; background:var(--cream); }
 .tile-photo span{ font-size:.68rem; }
 .tile-name{ font-size:.82rem; font-weight:600; line-height:1.3; }
 .tile-card.selected .tile-name{ color:var(--couro); }
