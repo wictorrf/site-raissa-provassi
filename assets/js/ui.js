@@ -44,18 +44,21 @@ function renderPautaRow(container, currentPauta, onPick, list) {
   });
 }
 
-// Detalles extra: cada opción es una tarjeta con la foto cuadrada arriba
-// (mientras no tengamos las fotos reales, un placeholder) y el nombre/precio
+// Detalles extra: cada opción es una tarjeta con un carrusel de fotos arriba
+// (varias opciones de diseño por ítem, ej. distintos broches) y el nombre/precio
 // abajo, para que se vea grande y clara.
-function renderChipGrid(container, list, selectedIds, onToggle) {
+function renderChipGrid(container, list, selectedIds, photoIndex, onToggle, onPhotoIndexChange) {
   container.innerHTML = list.map(item => `
     <div class="tile-card ${selectedIds.includes(item.id) ? 'selected' : ''}" data-id="${item.id}">
-      <div class="tile-photo photo-slot" data-photo-hint="foto: ${item.name}"><span>Foto</span></div>
+      <div class="tile-photo" data-tilephotos="${item.id}"></div>
       <div class="tile-name">${item.name}</div>
       <div class="tile-price">${money(item.price)}</div>
     </div>`).join("");
   container.querySelectorAll(".tile-card").forEach(el => {
     el.addEventListener("click", () => { onToggle(el.dataset.id); });
+  });
+  list.forEach(item => {
+    renderPhotoCarousel(container.querySelector(`[data-tilephotos="${item.id}"]`), item.photos, photoIndex[item.id] || 0, item.name, (idx) => onPhotoIndexChange(item.id, idx));
   });
 }
 

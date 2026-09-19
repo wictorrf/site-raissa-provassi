@@ -110,13 +110,16 @@ function calcCharmsTotal(pickedIds) {
 }
 
 const ACCESSORIES = [
-  { id: "broche", name: "Broche personalizado", price: 3000 },
-  { id: "marcador", name: "Marcador de página metálico", price: 2000 },
-  { id: "polaroid", name: "Foto Polaroid en la tapa", price: 6000 },
-  { id: "portalapices-metal", name: "Portalápices metálico", price: 4000 },
-  { id: "portalapices-cuero", name: "Portalápices en cuero", price: 3000 },
-  { id: "presilla", name: "Presilla metálica", price: 3000 },
-  { id: "lazos", name: "Lazos o rendas", price: 2000 },
+  { id: "broche", name: "Broche personalizado", price: 3000, photos: ["assets/img/broche-1.jpg", "assets/img/broche-2.jpg", "assets/img/broche-3.jpg", "assets/img/broche-4.jpg", "assets/img/broche-5.jpg"] },
+  { id: "marcador", name: "Marcador de página metálico", price: 2000, photos: 1 },
+  { id: "polaroid", name: "Foto Polaroid en la tapa", price: 6000, photos: 1 },
+  { id: "portalapices-metal", name: "Portalápices metálico", price: 4000, photos: 1 },
+  { id: "portalapices-cuero", name: "Portalápices en cuero", price: 3000, photos: 1 },
+  { id: "presilla", name: "Presilla metálica", price: 3000, photos: 1 },
+  { id: "lazos", name: "Lazos o rendas", price: 2000, photos: 1 },
+  { id: "broche-hp", name: "Broche para tapa de cuero - Harry Potter", price: 5000, photos: 1 },
+  { id: "clip-metalico", name: "Clip metálico", price: 300, photos: 1 },
+  { id: "broche-mariposa", name: "Broche mariposa elegante", price: 3000, photos: 1 },
 ];
 
 // Los 4 modelos de la colección lista. El precio NO se guarda acá:
