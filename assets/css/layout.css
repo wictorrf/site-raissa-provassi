@@ -98,6 +98,7 @@
 .pr-doc article ul{ margin-top:12px; padding-left:22px; }
 .pr-doc article li{ color:#4a4034; margin-top:7px; line-height:1.7; }
 .pr-doc article a{ color:var(--couro); font-weight:600; }
+.pr-doc article a.btn-couro{ color:#fff; }
 .pr-doc .pendiente{ color:var(--marsala); font-weight:700; font-style:italic; }
 .pr-doc .doc-cta{ margin-top:40px; padding-top:28px; border-top:1px solid var(--line); }
 
