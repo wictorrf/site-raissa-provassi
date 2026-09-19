@@ -17,6 +17,7 @@
       .map(l => `<div class="sum-row"><span class="k">${l.label}</span><span class="v">${l.value}</span></div>`)
       .join("");
     document.getElementById("deliveryTotal").textContent = money(order.total);
+    document.getElementById("deliveryTotalMobile").textContent = money(order.total);
 
     document.getElementById("deliveryBack").addEventListener("click", (e) => {
       e.preventDefault();
