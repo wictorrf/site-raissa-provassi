@@ -26,7 +26,10 @@
     previewSide: "fuera",
   });
 
-  let c = loadLiveState(FLOW) || defaultState();
+  // merge en vez de reemplazo directo: un estado guardado por una sesión
+  // anterior (antes de que se agregara algún campo nuevo) no debe dejar
+  // ese campo undefined y romper el render.
+  let c = Object.assign(defaultState(), loadLiveState(FLOW) || {});
   // si vino con ?preset= de la home, prioriza ese modelo aunque haya estado guardado.
   const qPreset = new URLSearchParams(window.location.search).get("preset");
   if (qPreset && byId(PRESETS, qPreset)) c.preset = qPreset;
