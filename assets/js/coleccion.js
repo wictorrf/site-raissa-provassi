@@ -5,7 +5,9 @@
 (function () {
   const FLOW = "collection";
   const SIZE_FLOW = "preset";
-  const INTERIOR_PREVIEW_HEXES = [COVERS_BUILD[0].hex, COVERS_BUILD[2].hex, COVERS_BUILD[5].hex];
+  // los 3 cuadernos "por dentro" son siempre negros con pauta lisa en todos
+  // los modelos de la colección lista (así lo pidió la clienta).
+  const INTERIOR_PREVIEW_HEXES = [COVERS_BUILD[5].hex, COVERS_BUILD[5].hex, COVERS_BUILD[5].hex];
 
   function presetFromQuery() {
     const params = new URLSearchParams(window.location.search);
@@ -112,12 +114,21 @@
     const lc = byId(LEATHER_COLORS, preset.leather), ec = byId(ELASTIC_COLORS, preset.elastic);
     const size = byId(sizesFor(SIZE_FLOW), c.size);
 
-    document.getElementById("collSummary").innerHTML = `
+    let summaryRows = `
       <div class="sum-row"><span class="k">Modelo</span><span class="v">${preset.name}</span></div>
       <div class="sum-row"><span class="k">Tamaño</span><span class="v">${size.name}</span></div>
       <div class="sum-row"><span class="k">Cuero</span><span class="v">${lc.name}</span></div>
       <div class="sum-row"><span class="k">Elástico</span><span class="v">${ec.name}</span></div>
       <div class="sum-row"><span class="k">Pauta</span><span class="v">Lisa</span></div>`;
+    REFILL_EXTRAS[SIZE_FLOW].forEach(item => {
+      const qty = c.refill[item.id] || 0;
+      if (qty > 0) {
+        const color = item.colors ? byId(item.colors, c.refillColors[item.id] || item.colors[0].id).name : item.fixedColorLabel;
+        const pauta = refillItemPautaName(item, c.refillPauta);
+        summaryRows += `<div class="sum-row"><span class="k">Agregado</span><span class="v">${item.name} · x${qty} · ${color} · Pauta ${pauta}</span></div>`;
+      }
+    });
+    document.getElementById("collSummary").innerHTML = summaryRows;
 
     const t = total();
     document.getElementById("collTotal").textContent = money(t);
