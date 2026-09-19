@@ -4,7 +4,7 @@
    reposicion.html y entrega.html.
    ============================================================ */
 
-const WHATSAPP_NUMBER = "549223548446";
+const WHATSAPP_NUMBER = "5492233548446";
 const INSTAGRAM_URL = "https://instagram.com/priori.colletion";
 const INSTAGRAM_HANDLE = "@priori.colletion";
 const CONTACT_EMAIL = "hola.prioricollection@gmail.com";
