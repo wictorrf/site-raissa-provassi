@@ -47,8 +47,9 @@
 /* colección lista: grid de productos */
 .product-card{ background:#fff; border:1px solid var(--line); border-radius:var(--r-lg); overflow:hidden; display:flex; flex-direction:column; transition:transform .25s ease, box-shadow .25s ease; }
 .product-card:hover{ transform:translateY(-4px); box-shadow:var(--shadow); }
-.product-photo{ aspect-ratio:4/3; display:flex; align-items:center; justify-content:center; position:relative; }
-.product-photo .product-badge{ position:absolute; top:14px; left:14px; background:var(--marsala); color:#fff; font-size:.64rem; letter-spacing:.1em; text-transform:uppercase; padding:.4em .8em; border-radius:999px; font-weight:800; }
+.product-photo{ aspect-ratio:3/4; position:relative; overflow:hidden; }
+.product-photo .pp-photo{ width:100%; height:100%; object-fit:cover; display:block; }
+.product-photo .product-badge{ position:absolute; top:14px; left:14px; background:var(--marsala); color:#fff; font-size:.64rem; letter-spacing:.1em; text-transform:uppercase; padding:.4em .8em; border-radius:999px; font-weight:800; z-index:1; }
 .product-body{ padding:20px 20px 22px; display:flex; flex-direction:column; gap:10px; flex:1; }
 .product-body h3{ font-size:1.15rem; margin:0; }
 .product-from{ font-size:.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; }

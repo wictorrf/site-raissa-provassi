@@ -125,9 +125,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const lc = byId(LEATHER_COLORS, p.leather), ec = byId(ELASTIC_COLORS, p.elastic);
     return `
     <div class="product-card">
-      <div class="product-photo photo-slot" data-photo-hint="foto: modelo ${p.name}" style="background:linear-gradient(150deg, ${lc.hex}22, ${ec.hex}33); border-radius:0; border:none; border-bottom:1px solid var(--line);">
+      <div class="product-photo" style="border-radius:0; border:none; border-bottom:1px solid var(--line);">
         ${i === 0 ? '<span class="product-badge">Más pedido</span>' : ''}
-        ${journalIconSVG(lc.hex, ec.hex, 72)}
+        <img class="pp-photo" src="${p.photos[0]}" alt="Modelo ${p.name}">
       </div>
       <div class="product-body">
         <h3>${p.name}</h3>
