@@ -110,7 +110,7 @@ function calcCharmsTotal(pickedIds) {
 }
 
 const ACCESSORIES = [
-  { id: "broche", name: "Broche personalizado", price: 3000, photos: ["assets/img/broche-1.jpg", "assets/img/broche-2.jpg", "assets/img/broche-3.jpg", "assets/img/broche-4.jpg", "assets/img/broche-5.jpg"] },
+  { id: "broche", name: "Broche personalizado", price: 3000, photos: ["assets/img/broche-3.jpg", "assets/img/broche-1.jpg", "assets/img/broche-2.jpg", "assets/img/broche-4.jpg", "assets/img/broche-5.jpg"] },
   { id: "marcador", name: "Marcador de página metálico", price: 2000, photos: 1 },
   { id: "polaroid", name: "Foto Polaroid en la tapa", price: 6000, photos: 1 },
   { id: "portalapices-metal", name: "Portalápices metálico", price: 4000, photos: 1 },
