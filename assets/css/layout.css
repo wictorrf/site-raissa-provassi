@@ -37,7 +37,7 @@
 .marquee-strip{ background:var(--card); border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:14px 0; overflow:hidden; }
 .marquee-track{ display:flex; white-space:nowrap; animation:scroll-left 24s linear infinite; width:max-content; will-change:transform; }
 @keyframes scroll-left{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
-.marquee-set{ font-size:.95rem; font-weight:600; color:var(--muted); letter-spacing:.01em; }
+.marquee-set{ font-size:.95rem; font-weight:600; color:var(--marsala); letter-spacing:.01em; }
 
 /* ---- flow steps (indicador de pasos) ---- */
 .flow-page{ background:var(--cream); min-height:100vh; padding:44px 0 100px; }
