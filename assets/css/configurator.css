@@ -134,7 +134,7 @@ img.photo-carousel-slide{ width:100%; object-fit:cover; display:block; }
 .preset-card:hover{ border-color:var(--couro); transform:translateY(-3px); }
 .preset-card.selected{ border-color:var(--couro); background:var(--card); box-shadow:inset 0 0 0 1px var(--couro), var(--shadow); }
 .preset-photo{ width:100%; display:flex; flex-direction:column; gap:8px; }
-.preset-photo .photo-carousel-slide{ border-radius:calc(var(--r-md) - 6px); }
+.preset-photo .photo-carousel-slide{ aspect-ratio:3/4; border-radius:calc(var(--r-md) - 6px); }
 .preset-card-body{ display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
 .preset-name{ font-weight:800; font-size:1.15rem; color:var(--ink); }
 .preset-copy{ font-size:.86rem; color:var(--muted); margin:.35em 0 0; line-height:1.5; }
