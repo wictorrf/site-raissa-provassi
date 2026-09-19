@@ -129,6 +129,14 @@
     if (c.engrave.on) rows += `<div class="sum-row"><span class="k">Grabado</span><span class="v">${c.engrave.text || "Sin texto"}</span></div>`;
     if (c.charms.length) rows += `<div class="sum-row"><span class="k">Dijes</span><span class="v">${charmsSummary()}</span></div>`;
     if (c.accessories.length) rows += `<div class="sum-row"><span class="k">Extras</span><span class="v">${c.accessories.map(id => byId(ACCESSORIES, id).name).join(", ")}</span></div>`;
+    REFILL_EXTRAS[SIZE_FLOW].forEach(item => {
+      const qty = c.refill[item.id] || 0;
+      if (qty > 0) {
+        const color = item.colors ? byId(item.colors, c.refillColors[item.id] || item.colors[0].id).name : item.fixedColorLabel;
+        const pauta = refillItemPautaName(item, c.refillPauta);
+        rows += `<div class="sum-row"><span class="k">Agregado</span><span class="v">${item.name} · x${qty} · ${color} · Pauta ${pauta}</span></div>`;
+      }
+    });
     document.getElementById("custSummary").innerHTML = rows;
 
     const t = total();
