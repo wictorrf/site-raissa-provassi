@@ -20,7 +20,7 @@ const SIZE_META = [
 const SIZE_PRICES = {
   preset: { A5: 27000, A6: 20000 }, // coleccion.html — Modelos ya armados
   custom: { A5: 28000, A6: 22000 }, // personalizar.html — Armá tu Priori
-  refill: { A5: 8000, A6: 6000 },   // reposicion.html — por cuaderno
+  refill: { A5: 7000, A6: 6000 },   // reposicion.html — por cuaderno
 };
 function sizesFor(flow) { return SIZE_META.map(s => ({ ...s, price: SIZE_PRICES[flow][s.id] })); }
 
