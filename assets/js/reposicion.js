@@ -10,7 +10,10 @@
   const defaultNotebook = () => ({ size: "A5", cover: COVERS_REFILL_A5[0].id, pauta: "lisa" });
   const defaultState = () => ({ notebooks: [defaultNotebook(), defaultNotebook(), defaultNotebook()] });
 
-  let c = loadLiveState(FLOW) || defaultState();
+  // merge en vez de reemplazo directo: un estado guardado por una sesión
+  // anterior (antes de que se agregara algún campo nuevo) no debe dejar
+  // ese campo undefined y romper el render.
+  let c = Object.assign(defaultState(), loadLiveState(FLOW) || {});
 
   function persist() { saveLiveState(FLOW, c); }
 
