@@ -20,6 +20,7 @@
     refillColors: {},
     refillPauta: {},
     refillPhotoIndex: {},
+    presetPhotoIndex: {},
     previewSide: "fuera",
   });
 
@@ -44,11 +45,8 @@
   function renderPresetGrid() {
     const grid = document.getElementById("presetGrid");
     grid.innerHTML = PRESETS.map(p => {
-      const lc = byId(LEATHER_COLORS, p.leather), ec = byId(ELASTIC_COLORS, p.elastic);
       return `<div class="preset-card ${p.id === c.preset ? 'selected' : ''}" data-id="${p.id}">
-        <div class="preset-photo photo-slot" data-photo-hint="foto: modelo ${p.name}" style="background:linear-gradient(150deg, ${lc.hex}22, ${ec.hex}33);">
-          <span>Foto</span>
-        </div>
+        <div class="preset-photo" data-presetphotos="${p.id}"></div>
         <div class="preset-card-body">
           <div>
             <div class="preset-name">${p.name}</div>
@@ -60,6 +58,15 @@
     }).join("");
     grid.querySelectorAll(".preset-card").forEach(el => {
       el.addEventListener("click", () => { c.preset = el.dataset.id; refresh(); });
+    });
+  }
+
+  function renderPresetPhotos() {
+    PRESETS.forEach(p => {
+      const container = document.querySelector(`[data-presetphotos="${p.id}"]`);
+      renderPhotoCarousel(container, p.photos, c.presetPhotoIndex[p.id] || 0, p.name, (idx) => {
+        c.presetPhotoIndex[p.id] = idx; refresh();
+      });
     });
   }
 
@@ -95,6 +102,7 @@
     document.querySelectorAll("#presetGrid .preset-card").forEach(el => {
       el.classList.toggle("selected", el.dataset.id === c.preset);
     });
+    renderPresetPhotos();
     renderSizeGrid(document.getElementById("collSizeGrid"), sizesFor(SIZE_FLOW), c.size, (val) => { c.size = val; renderAddons(); refresh(); });
     renderAddons();
 

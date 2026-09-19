@@ -117,7 +117,8 @@ function renderPhotoCarousel(container, count, index, hintPrefix, onChange) {
       <button type="button" class="pc-arrow" data-dir="1" ${count <= 1 ? "disabled" : ""} aria-label="Foto siguiente">›</button>
     </div>`;
   container.querySelectorAll(".pc-arrow").forEach(btn => {
-    btn.addEventListener("click", () => {
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
       const next = (i + Number(btn.dataset.dir) + count) % count;
       onChange(next);
     });
