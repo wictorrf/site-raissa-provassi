@@ -107,10 +107,18 @@ function renderQuantityStepper(container, qty, onChange, opts) {
 
 // Carrusel de fotos de referencia: un placeholder grande navegable (‹ ›) con
 // N espacios reservados, mientras no llegan las fotos reales del producto.
-function renderPhotoCarousel(container, count, index, hintPrefix, onChange) {
+// `photos` acepta un número (todo placeholder) o un array de rutas de imagen
+// (una entrada puede ser null/undefined si esa foto puntual todavía no llegó).
+function renderPhotoCarousel(container, photos, index, hintPrefix, onChange) {
+  const images = Array.isArray(photos) ? photos : Array.from({ length: photos }, () => null);
+  const count = images.length;
   const i = Math.min(Math.max(index || 0, 0), count - 1);
+  const src = images[i];
+  const slideMarkup = src
+    ? `<img class="photo-carousel-slide" src="${src}" alt="${hintPrefix} — foto ${i + 1}/${count}">`
+    : `<div class="photo-carousel-slide photo-slot" data-photo-hint="${hintPrefix} — foto ${i + 1}/${count}"><span>Foto ${i + 1}/${count}</span></div>`;
   container.innerHTML = `
-    <div class="photo-carousel-slide photo-slot" data-photo-hint="${hintPrefix} — foto ${i + 1}/${count}"><span>Foto ${i + 1}/${count}</span></div>
+    ${slideMarkup}
     <div class="photo-carousel-nav">
       <button type="button" class="pc-arrow" data-dir="-1" ${count <= 1 ? "disabled" : ""} aria-label="Foto anterior">‹</button>
       <div class="pc-dots">${Array.from({ length: count }, (_, d) => `<span class="pc-dot ${d === i ? "active" : ""}"></span>`).join("")}</div>

@@ -122,10 +122,10 @@ const ACCESSORIES = [
 // Los 4 modelos de la colección lista. El precio NO se guarda acá:
 // se deriva de SIZE_PRICES.preset según el tamaño elegido en coleccion.html.
 const PRESETS = [
-  { id: "origem", name: "Origem", copy: "Inspirado en lo esencial: cálido y atemporal, perfecto para tu primer Priori.", desc: "Cuero marrón · elástico rosa bebé · dije de cisne · 3 cuadernos Priori · pauta lisa", leather: "marron", elastic: "rosa-bebe", photos: 3 },
-  { id: "serena", name: "Serena", copy: "Delicado y femenino, pensado para acompañar tu corazón y tu creatividad.", desc: "Cuero rosa claro · elástico rosa bebé · dije de cisne · 3 cuadernos Priori · pauta lisa", leather: "rosa-claro", elastic: "rosa-bebe", photos: 3 },
-  { id: "luna", name: "Luna", copy: "Elegante y sereno, para dejar espacio a nuevas ideas.", desc: "Cuero azul marino · elástico azul claro · dije de cisne · 3 cuadernos Priori · pauta lisa", leather: "azul-marino", elastic: "azul-bebe", photos: 3 },
-  { id: "aura", name: "Aura", copy: "Intenso y sofisticado, con un toque de personalidad.", desc: "Cuero marsala · elástico rosa bebé · dije de cisne · 3 cuadernos Priori · pauta lisa", leather: "marsala", elastic: "rosa-bebe", photos: 3 },
+  { id: "origem", name: "Origem", copy: "Inspirado en lo esencial: cálido y atemporal, perfecto para tu primer Priori.", desc: "Cuero marrón · elástico rosa bebé · dije de cisne · 3 cuadernos Priori · pauta lisa", leather: "marron", elastic: "rosa-bebe", photos: ["assets/img/origem-1.jpg", "assets/img/origem-2.jpg", "assets/img/origem-3.jpg"] },
+  { id: "serena", name: "Serena", copy: "Delicado y femenino, pensado para acompañar tu corazón y tu creatividad.", desc: "Cuero rosa claro · elástico rosa bebé · dije de cisne · 3 cuadernos Priori · pauta lisa", leather: "rosa-claro", elastic: "rosa-bebe", photos: ["assets/img/serena-1.jpg", "assets/img/serena-2.jpg", "assets/img/serena-3.jpg"] },
+  { id: "luna", name: "Luna", copy: "Elegante y sereno, para dejar espacio a nuevas ideas.", desc: "Cuero azul marino · elástico azul claro · dije de cisne · 3 cuadernos Priori · pauta lisa", leather: "azul-marino", elastic: "azul-bebe", photos: ["assets/img/luna-1.jpg", "assets/img/luna-2.jpg", "assets/img/luna-3.jpg"] },
+  { id: "aura", name: "Aura", copy: "Intenso y sofisticado, con un toque de personalidad.", desc: "Cuero marsala · elástico rosa bebé · dije de cisne · 3 cuadernos Priori · pauta lisa", leather: "marsala", elastic: "rosa-bebe", photos: ["assets/img/aura-1.jpg", "assets/img/aura-2.jpg", "assets/img/aura-3.jpg"] },
 ];
 
 // Refil extra: 3 productos con cantidad seleccionable, precio distinto según el
