@@ -87,6 +87,7 @@
 img.photo-carousel-slide{ width:100%; object-fit:cover; display:block; }
 .refill-extra-photos[data-refillphotos="rajado-a5"] .photo-carousel-slide,
 .refill-extra-photos[data-refillphotos="liso-a5-dorado"] .photo-carousel-slide{ aspect-ratio:3/4; }
+.refill-extra-photos[data-refillphotos="a6"] .photo-carousel-slide{ aspect-ratio:828/858; }
 .photo-carousel-nav{ display:flex; align-items:center; justify-content:space-between; gap:8px; }
 .pc-arrow{ width:28px; height:28px; border-radius:50%; border:1px solid var(--line); background:#fff; color:var(--couro); font-size:1rem; line-height:1; display:flex; align-items:center; justify-content:center; cursor:pointer; flex:none; transition:border-color .15s, background .15s; }
 .pc-arrow:hover:not(:disabled){ border-color:var(--couro); background:var(--card); }
