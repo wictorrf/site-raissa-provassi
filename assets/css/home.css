@@ -6,7 +6,7 @@
 .hero{
   position:relative; min-height:88vh; display:flex; align-items:flex-end; justify-content:center;
   overflow:hidden; padding-bottom:3vh;
-  background-color:#a98670; /* respaldo/"letterbox" en pantallas ultra anchas, tono tomado de la propia foto */
+  background-color:#9c7c66; /* respaldo/"letterbox" en pantallas ultra anchas y en el recorte mobile, tono tomado de la propia foto */
 }
 /* la foto tiene el texto "horneado" en el archivo — un ancho tope evita que en pantallas
    muy anchas y bajas el recorte vertical del background-size:cover empuje ese texto
@@ -29,7 +29,12 @@
 @media (max-width:560px){
   .hero{ min-height:90vh; padding-bottom:8vh; }
   .hero::after{ background:linear-gradient(180deg, rgba(20,16,10,.24) 0%, rgba(18,14,9,.3) 45%, rgba(15,12,8,.72) 100%); }
-  .hero-bg{ background-position:100% 58%; }
+  /* la nueva foto tiene el texto horneado más ancho que el margen limpio a
+     cada lado, así que cualquier recorte "cover" deja asomar una letra —
+     105% empuja el recorte apenas más allá del borde derecho de la imagen
+     (mostrando el color de respaldo, ya afinado al tono de la foto) para
+     que ninguna letra quede a medias. */
+  .hero-bg{ background-position:105% 40%; }
   .hero-mobile-copy{ display:block; position:relative; z-index:2; text-align:center; max-width:340px; margin:0 auto 22px; }
   .hero-mobile-copy .eyebrow{ color:rgba(255,255,255,.85); }
   .hero-mobile-copy .eyebrow::before{ display:none; }
