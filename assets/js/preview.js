@@ -74,8 +74,9 @@ function buildExteriorSVG({ coverHex, elasticHex, engraveOn, engraveText, charmI
 
 // "Por dentro": los cuadernos lado a lado (2 en el personalizador, 3 en la
 // colección lista y en reposición), cada uno con su color y pauta.
-// notebooks = [{ coverHex, pauta }] — el hex ya resuelto por el caller, porque
-// según la pantalla la tapa de cada cuaderno sale de una paleta distinta.
+// notebooks = [{ coverHex, pauta, label? }] — el hex ya resuelto por el caller, porque
+// según la pantalla la tapa de cada cuaderno sale de una paleta distinta. `label` es el
+// número que se muestra en la pestaña (por defecto, la posición en la lista).
 function buildInteriorSVG(notebooks) {
   const n = notebooks.length;
   // con 2 cuadernos se dibujan más anchos para que el preview no quede vacío.
@@ -96,7 +97,7 @@ function buildInteriorSVG(notebooks) {
       <rect x="${x + 6}" y="70" width="${w - 12}" height="196" rx="3" fill="#FBF8F2"></rect>
       ${pagePattern}
       <circle cx="${x + w / 2}" cy="35" r="10" fill="rgba(255,255,255,.88)"></circle>
-      <text class="nb-badge" x="${x + w / 2}" y="39" text-anchor="middle" font-size="11" fill="#1B2740">${i + 1}</text>`;
+      <text class="nb-badge" x="${x + w / 2}" y="39" text-anchor="middle" font-size="11" fill="#1B2740">${nb.label || i + 1}</text>`;
   }).join("");
   return `<svg class="journal-svg-dynamic" viewBox="0 0 220 300" style="width:190px;">${patternDefs}${notebooksMarkup}</svg>`;
 }
