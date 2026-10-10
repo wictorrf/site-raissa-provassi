@@ -84,10 +84,7 @@
 .refill-extra-photos{ flex:none; width:190px; display:flex; flex-direction:column; gap:10px; }
 .photo-carousel-slide{ aspect-ratio:4/3; }
 img.photo-carousel-slide{ width:100%; object-fit:cover; display:block; }
-.refill-extra-photos[data-refillphotos="rajado-a5"] .photo-carousel-slide,
-.refill-extra-photos[data-refillphotos="liso-a5-dorado"] .photo-carousel-slide{ aspect-ratio:3/4; }
-.refill-extra-photos[data-refillphotos="a6"] .photo-carousel-slide{ aspect-ratio:828/858; }
-/* refil extra del personalizador: fotos 3:4 que se ven completas (contain), sin recorte */
+/* refil extra (personalizador y colección lista): fotos 3:4 que se ven completas (contain), sin recorte */
 .refill-extra-photos[data-refillphotos="refil-a5"] .photo-carousel-slide,
 .refill-extra-photos[data-refillphotos="refil-a6"] .photo-carousel-slide{ aspect-ratio:3/4; }
 .refill-extra-photos[data-refillphotos="refil-a5"] img.photo-carousel-slide,

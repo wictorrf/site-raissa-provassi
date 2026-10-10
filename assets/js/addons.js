@@ -1,6 +1,5 @@
 /* ============================================================
-   PRIORI — bloque de refis extra con cantidad (3 en "Sumá algo más" de la
-   colección lista, 2 en "Refil extra" del personalizador), compartido
+   PRIORI — bloque "Refil extra" (A5 y A6, con cantidad), compartido
    entre personalizar.js y coleccion.js.
    ============================================================ */
 
