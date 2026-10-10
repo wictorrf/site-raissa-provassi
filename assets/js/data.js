@@ -51,33 +51,14 @@ const COVERS_BUILD = [ // "Los 2 cuadernos" del personalizador (Armá tu Priori)
   { id: "azul", name: "Azul", hex: "#3A5A8C" },
   { id: "rojo", name: "Rojo", hex: "#A3272C" },
 ];
-const COVERS_REFILL_A5 = [ // Reposición (A5)
-  { id: "azul-claro", name: "Azul claro", hex: "#A9C8E8" },
-  { id: "bege", name: "Bege", hex: "#D8C3A5" },
-  { id: "azul-marino", name: "Azul marino", hex: "#1B2740" },
-  { id: "verde-oliva", name: "Verde oliva", hex: "#7C7A4A" },
-  { id: "bege-quemado", name: "Bege quemado", hex: "#B79A6B" },
-  { id: "negro", name: "Negro", hex: "#201C19" },
-];
-const COVERS_REFILL_A6 = [ // Reposición (A6)
-  { id: "verde-oscuro", name: "Verde oscuro", hex: "#2F4A38" },
-  { id: "verde-claro", name: "Verde claro", hex: "#9FC48C" },
-  { id: "oliva", name: "Oliva", hex: "#7C7A4A" },
-  { id: "morado", name: "Morado", hex: "#5B3A6B" },
-  { id: "vino", name: "Vino", hex: "#6E2436" },
-  { id: "pink", name: "Pink", hex: "#E85D9E" },
-  { id: "rosa-bebe", name: "Rosa bebé", hex: "#F3C9D4" },
-  { id: "azul-claro", name: "Azul claro", hex: "#A9C8E8" },
-  { id: "azul-marino", name: "Azul marino", hex: "#1B2740" },
-  { id: "marron", name: "Marrón", hex: "#6B4530" },
-];
-
 const COVERS_REFILL_EXTRA = [ // "Refil extra" (A5 y A6) del personalizador y de la colección lista: mismos 4 colores, igual que las fotos
   { id: "lila", name: "Lila", hex: "#D5C3E6" },
   { id: "negro", name: "Negro", hex: "#201C19" },
   { id: "azul-marino", name: "Azul marino", hex: "#3F4F72" },
   { id: "rojo", name: "Rojo", hex: "#DE3933" },
 ];
+// Reposición (A5 y A6): los mismos 4 colores del refil extra, en el orden que pidió la clienta.
+const COVERS_REPOSICION = ["lila", "azul-marino", "negro", "rojo"].map(id => byId(COVERS_REFILL_EXTRA, id));
 // Fotos del refil extra: la primera es la Lila. Ya vienen
 // encuadradas en 3:4 (600x800) para que no se corten en el carrusel.
 const REFILL_EXTRA_PHOTOS = [

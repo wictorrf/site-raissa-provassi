@@ -136,16 +136,20 @@ function renderPhotoCarousel(container, photos, index, hintPrefix, onChange) {
   });
 }
 
-// Bloque "Cuaderno N" (tamaño opcional + color de tapa + pauta), reutilizado por
-// personalizar.js ("Los 2 cuadernos") y reposicion.js (cada cuaderno de repuesto).
+// Bloque "Cuaderno N" (cantidad y tamaño opcionales + color de tapa + pauta), reutilizado por
+// personalizar.js ("Los 2 cuadernos") y reposicion.js (cada cuaderno de repuesto, con cantidad).
 function renderNotebookBlock(container, index, notebook, opts) {
-  const { covers, pautaOptions, showSize, sizePrices, onCoverChange, onPautaChange, onSizeChange } = opts;
+  const { covers, pautaOptions, showSize, sizePrices, onCoverChange, onPautaChange, onSizeChange, showQty, minQty, maxQty, onQtyChange } = opts;
   container.innerHTML = `
     <h4>Cuaderno ${index + 1}</h4>
+    ${showQty ? `<div class="nb-row"><span class="nb-label">Cantidad</span><div class="qty-stepper" data-nbqty="${index}"></div></div>` : ""}
     ${showSize ? `<div class="nb-row"><span class="nb-label">Tamaño</span><div class="nb-size-row" data-nbsize="${index}"></div></div>` : ""}
     <div class="nb-row"><span class="nb-label">Color</span><div class="swatch-row" data-nbcover="${index}"></div></div>
     <div class="nb-row"><span class="nb-label">Pauta</span><div class="pauta-row" data-nbpauta="${index}"></div></div>`;
 
+  if (showQty) {
+    renderQuantityStepper(container.querySelector(`[data-nbqty="${index}"]`), notebook.qty, onQtyChange, { min: minQty, max: maxQty });
+  }
   if (showSize) {
     const sizeRow = container.querySelector(`[data-nbsize="${index}"]`);
     sizeRow.innerHTML = ["A5", "A6"].map(id => `
