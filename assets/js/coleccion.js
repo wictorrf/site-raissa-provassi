@@ -7,7 +7,8 @@
   const SIZE_FLOW = "preset";
   // los 3 cuadernos "por dentro" son siempre negros con pauta lisa en todos
   // los modelos de la colección lista (así lo pidió la clienta).
-  const INTERIOR_PREVIEW_HEXES = [COVERS_BUILD[5].hex, COVERS_BUILD[5].hex, COVERS_BUILD[5].hex];
+  const BLACK_HEX = byId(COVERS_BUILD, "preto").hex;
+  const INTERIOR_PREVIEW_HEXES = [BLACK_HEX, BLACK_HEX, BLACK_HEX];
 
   function presetFromQuery() {
     const params = new URLSearchParams(window.location.search);

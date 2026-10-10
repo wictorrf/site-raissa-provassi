@@ -72,16 +72,16 @@ function buildExteriorSVG({ coverHex, elasticHex, engraveOn, engraveText, charmI
   </svg>`;
 }
 
-// "Por dentro": los 3 cuadernos lado a lado, cada uno con su color y pauta.
+// "Por dentro": los cuadernos lado a lado (2 en el personalizador, 3 en la
+// colección lista y en reposición), cada uno con su color y pauta.
 // notebooks = [{ coverHex, pauta }] — el hex ya resuelto por el caller, porque
 // según la pantalla la tapa de cada cuaderno sale de una paleta distinta.
 function buildInteriorSVG(notebooks) {
-  const w = 56, gap = 8, totalW = w * 3 + gap * 2, startX = (220 - totalW) / 2;
+  const n = notebooks.length;
+  // con 2 cuadernos se dibujan más anchos para que el preview no quede vacío.
+  const w = n <= 2 ? 68 : 56, gap = n <= 2 ? 10 : 8, totalW = w * n + gap * (n - 1), startX = (220 - totalW) / 2;
   const patternDefs = `
     <defs>
-      <pattern id="pat-punteada" width="9" height="9" patternUnits="userSpaceOnUse">
-        <circle cx="2" cy="2" r="1.1" fill="rgba(35,31,27,.35)"></circle>
-      </pattern>
       <pattern id="pat-rayada" width="10" height="10" patternUnits="userSpaceOnUse">
         <line x1="0" y1="9" x2="10" y2="9" stroke="rgba(35,31,27,.3)" stroke-width="1"></line>
       </pattern>

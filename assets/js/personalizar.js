@@ -12,7 +12,6 @@
     elastic: "marron",
     notebooks: [
       { cover: "azul", pauta: "lisa" },
-      { cover: "verde-agua", pauta: "lisa" },
       { cover: "preto", pauta: "lisa" },
     ],
     engrave: { on: false, text: "" },
@@ -30,18 +29,21 @@
   // anterior (antes de que se agregara algún campo nuevo, ej. accessoryPhotoIndex)
   // no debe dejar ese campo undefined y romper el render.
   let c = Object.assign(defaultState(), loadLiveState(FLOW) || {});
+  // un estado guardado de una versión anterior puede traer 3 cuadernos, colores
+  // que ya no existen (verde agua, bege...) o la pauta "punteada": se lo lleva a
+  // opciones válidas para que byId() no devuelva undefined y rompa el render.
+  c.notebooks = defaultState().notebooks.map((def, i) => {
+    const nb = (c.notebooks && c.notebooks[i]) || def;
+    return {
+      cover: byId(COVERS_BUILD, nb.cover) ? nb.cover : def.cover,
+      pauta: byId(PAUTAS, nb.pauta) ? nb.pauta : def.pauta,
+    };
+  });
 
   function persist() { saveLiveState(FLOW, c); }
 
-  function baseTotal() {
-    const size = byId(sizesFor(SIZE_FLOW), c.size);
-    let base = size.price;
-    c.notebooks.forEach(nb => { if (nb.pauta === "punteada") base += PONTILHADO_EXTRA; });
-    return base;
-  }
-
   function total() {
-    let t = baseTotal(); // tamaño + extra por pauta punteada
+    let t = byId(sizesFor(SIZE_FLOW), c.size).price; // la pauta lisa/rayada no suma costo
     if (c.engrave.on) t += 4000;
     t += calcCharmsTotal(c.charms);
     c.accessories.forEach(id => { t += byId(ACCESSORIES, id).price; });
@@ -177,7 +179,6 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("custPautaHint").textContent = money(PONTILHADO_EXTRA);
     document.getElementById("engravePriceHint").textContent = money(4000);
     document.getElementById("charmPriceHint").textContent = money(600);
 

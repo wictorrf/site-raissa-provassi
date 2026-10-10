@@ -43,7 +43,6 @@
 .pauta-swatch{ width:56px; height:56px; border-radius:8px; border:1px solid var(--line); background:#fbf8f2; position:relative; overflow:hidden; }
 .pauta-option.selected .pauta-swatch{ border:2px solid var(--couro); }
 .pauta-swatch.p-rayada{ background-image:repeating-linear-gradient(transparent, transparent 8px, var(--line) 8px, var(--line) 9px); }
-.pauta-swatch.p-punteada{ background-image:radial-gradient(var(--line) 1px, transparent 1.4px); background-size:9px 9px; }
 .pauta-option span{ font-size:.72rem; color:var(--muted); }
 .pauta-option.selected span{ color:var(--couro); font-weight:700; }
 .nb-price-hint{ font-size:.72rem; color:var(--muted); margin-left:6px; }
