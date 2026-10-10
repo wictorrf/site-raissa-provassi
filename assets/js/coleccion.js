@@ -5,10 +5,10 @@
 (function () {
   const FLOW = "collection";
   const SIZE_FLOW = "preset";
-  // los 3 cuadernos "por dentro" son siempre negros con pauta lisa en todos
+  // los 2 cuadernos "por dentro" son siempre negros con pauta lisa en todos
   // los modelos de la colección lista (así lo pidió la clienta).
   const BLACK_HEX = byId(COVERS_BUILD, "preto").hex;
-  const INTERIOR_PREVIEW_HEXES = [BLACK_HEX, BLACK_HEX, BLACK_HEX];
+  const INTERIOR_PREVIEW_HEXES = [BLACK_HEX, BLACK_HEX];
 
   function presetFromQuery() {
     const params = new URLSearchParams(window.location.search);
@@ -148,7 +148,7 @@
       { label: "Tamaño", value: size.name },
       { label: "Cuero", value: lc.name },
       { label: "Elástico", value: ec.name },
-      { label: "Pauta (3 cuadernos)", value: "Lisa" },
+      { label: "Pauta (2 cuadernos)", value: "Lisa" },
     ];
     REFILL_EXTRAS[SIZE_FLOW].forEach(item => {
       const qty = c.refill[item.id] || 0;
