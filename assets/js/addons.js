@@ -1,6 +1,7 @@
 /* ============================================================
-   PRIORI — bloque "Sumá algo más" (los 3 refis extra con cantidad),
-   compartido entre personalizar.js y coleccion.js.
+   PRIORI — bloque de refis extra con cantidad (3 en "Sumá algo más" de la
+   colección lista, 2 en "Refil extra" del personalizador), compartido
+   entre personalizar.js y coleccion.js.
    ============================================================ */
 
 // flow = "preset" (coleccion.html) | "custom" (personalizar.html) — cada uno

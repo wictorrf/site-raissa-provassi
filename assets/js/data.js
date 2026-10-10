@@ -72,6 +72,21 @@ const COVERS_REFILL_A6 = [ // Reposición (A6) y "Outro refil extra" A6 en ambos
   { id: "marron", name: "Marrón", hex: "#6B4530" },
 ];
 
+const COVERS_REFILL_EXTRA = [ // "Refil extra" del personalizador (A5 y A6): mismos 4 colores, igual que las fotos
+  { id: "lila", name: "Lila", hex: "#D5C3E6" },
+  { id: "negro", name: "Negro", hex: "#201C19" },
+  { id: "azul-marino", name: "Azul marino", hex: "#3F4F72" },
+  { id: "rojo", name: "Rojo", hex: "#DE3933" },
+];
+// Fotos del refil extra del personalizador: la primera es la Lila. Ya vienen
+// encuadradas en 3:4 (600x800) para que no se corten en el carrusel.
+const REFILL_EXTRA_PHOTOS = [
+  "assets/img/refil-extra-lila.jpg",
+  "assets/img/refil-extra-azul-marino.jpg",
+  "assets/img/refil-extra-negro.jpg",
+  "assets/img/refil-extra-rojo.jpg",
+];
+
 const PAUTAS = [
   { id: "lisa", name: "Lisa" },
   { id: "rayada", name: "Rayada" },
@@ -134,10 +149,11 @@ const REFILL_EXTRAS = {
     { id: "liso-a5-dorado", name: "Refil extra - Signature Colletion (A5)", unitPrice: 7000, size: "A5", fixedColorLabel: "Negro con detalle en dorado exclusivo de la marca.", pautaOptions: PAUTAS_REFILL, photos: ["assets/img/signature-collection-1.jpg"] },
     { id: "a6", name: "Refil extra (A6)", unitPrice: 6000, size: "A6", colors: COVERS_REFILL_A6, pautaOptions: PAUTAS_REFILL, photos: ["assets/img/refil-a6-1.jpg"] },
   ],
+  // personalizador: un solo cuaderno de repuesto, en A5 y en A6 (los ids son nuevos a
+  // propósito, así un estado guardado con los ids anteriores no apunta a colores que ya no existen).
   custom: [
-    { id: "rajado-a5", name: "Refil Extra - Soft Living Collection (A5)", unitPrice: 7000, size: "A5", colors: COVERS_REFILL_A5, pauta: "rayada", photos: ["assets/img/soft-living-1.jpg", "assets/img/soft-living-2.jpg", "assets/img/soft-living-3.jpg", "assets/img/soft-living-4.jpg", "assets/img/soft-living-5.jpg", "assets/img/soft-living-6.jpg"] },
-    { id: "liso-a5-dorado", name: "Refil extra - Signature Colletion (A5)", unitPrice: 7000, size: "A5", fixedColorLabel: "Negro con detalle en dorado exclusivo de la marca.", pautaOptions: PAUTAS_REFILL, photos: ["assets/img/signature-collection-1.jpg"] },
-    { id: "a6", name: "Refil extra (A6)", unitPrice: 6000, size: "A6", colors: COVERS_REFILL_A6, pautaOptions: PAUTAS_REFILL, photos: ["assets/img/refil-a6-1.jpg"] },
+    { id: "refil-a5", name: "Refil extra (A5)", unitPrice: 7000, size: "A5", colors: COVERS_REFILL_EXTRA, pautaOptions: PAUTAS_REFILL, photos: REFILL_EXTRA_PHOTOS },
+    { id: "refil-a6", name: "Refil extra (A6)", unitPrice: 6000, size: "A6", colors: COVERS_REFILL_EXTRA, pautaOptions: PAUTAS_REFILL, photos: REFILL_EXTRA_PHOTOS },
   ],
 };
 
