@@ -137,7 +137,7 @@ function renderPhotoCarousel(container, photos, index, hintPrefix, onChange) {
 }
 
 // Bloque "Cuaderno N" (tamaño opcional + color de tapa + pauta), reutilizado por
-// personalizar.js ("Los 3 cuadernos") y reposicion.js (cada cuaderno de repuesto).
+// personalizar.js ("Los 2 cuadernos") y reposicion.js (cada cuaderno de repuesto).
 function renderNotebookBlock(container, index, notebook, opts) {
   const { covers, pautaOptions, showSize, sizePrices, onCoverChange, onPautaChange, onSizeChange } = opts;
   container.innerHTML = `

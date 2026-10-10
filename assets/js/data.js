@@ -24,8 +24,6 @@ const SIZE_PRICES = {
 };
 function sizesFor(flow) { return SIZE_META.map(s => ({ ...s, price: SIZE_PRICES[flow][s.id] })); }
 
-const PONTILHADO_EXTRA = 3000; // por cuaderno, solo en "Armá tu Priori" si la pauta es punteada
-
 const LEATHER_COLORS = [
   { id: "marron", name: "Marrón", hex: "#6B4530" },
   { id: "negro", name: "Negro", hex: "#201C19" },
@@ -47,13 +45,11 @@ const ELASTIC_COLORS = [
 
 // Color de tapa de cada cuaderno — 3 paletas distintas según el contexto
 // (así lo pidió la clienta: cada pantalla tiene su propia gama de colores).
-const COVERS_BUILD = [ // "Los 3 cuadernos" del personalizador (Armá tu Priori)
-  { id: "azul", name: "Azul", hex: "#3A5A8C" },
-  { id: "verde-agua", name: "Verde agua", hex: "#8FC1B5" },
-  { id: "azul-claro", name: "Azul claro", hex: "#A9C8E8" },
-  { id: "bege", name: "Bege", hex: "#D8C3A5" },
-  { id: "amarelo-manteiga", name: "Amarillo manteca", hex: "#E8D08A" },
+const COVERS_BUILD = [ // "Los 2 cuadernos" del personalizador (Armá tu Priori)
+  { id: "lila", name: "Lila", hex: "#B7A2D6" },
   { id: "preto", name: "Negro", hex: "#201C19" },
+  { id: "azul", name: "Azul", hex: "#3A5A8C" },
+  { id: "rojo", name: "Rojo", hex: "#A3272C" },
 ];
 const COVERS_REFILL_A5 = [ // Reposición (A5) y "Refil extra" A5 en ambos "Sumá algo más"
   { id: "azul-claro", name: "Azul claro", hex: "#A9C8E8" },
@@ -77,11 +73,10 @@ const COVERS_REFILL_A6 = [ // Reposición (A6) y "Outro refil extra" A6 en ambos
 ];
 
 const PAUTAS = [
-  { id: "punteada", name: "Punteada" },
   { id: "lisa", name: "Lisa" },
   { id: "rayada", name: "Rayada" },
 ];
-const PAUTAS_REFILL = PAUTAS.filter(p => p.id !== "punteada"); // Reposición: solo Rayada/Lisa
+const PAUTAS_REFILL = PAUTAS; // Reposición y refil extra usan las mismas dos opciones
 
 // Dijes — el primero que se elige es gratis; desde el segundo se cobra $600 por
 // unidad, con la excepción del Cisne que siempre cobra $1.500 (ver calcCharmsTotal).
