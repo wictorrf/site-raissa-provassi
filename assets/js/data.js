@@ -51,7 +51,7 @@ const COVERS_BUILD = [ // "Los 2 cuadernos" del personalizador (Armá tu Priori)
   { id: "azul", name: "Azul", hex: "#3A5A8C" },
   { id: "rojo", name: "Rojo", hex: "#A3272C" },
 ];
-const COVERS_REFILL_A5 = [ // Reposición (A5) y "Refil extra" A5 en ambos "Sumá algo más"
+const COVERS_REFILL_A5 = [ // Reposición (A5)
   { id: "azul-claro", name: "Azul claro", hex: "#A9C8E8" },
   { id: "bege", name: "Bege", hex: "#D8C3A5" },
   { id: "azul-marino", name: "Azul marino", hex: "#1B2740" },
@@ -59,7 +59,7 @@ const COVERS_REFILL_A5 = [ // Reposición (A5) y "Refil extra" A5 en ambos "Sum�
   { id: "bege-quemado", name: "Bege quemado", hex: "#B79A6B" },
   { id: "negro", name: "Negro", hex: "#201C19" },
 ];
-const COVERS_REFILL_A6 = [ // Reposición (A6) y "Outro refil extra" A6 en ambos "Sumá algo más"
+const COVERS_REFILL_A6 = [ // Reposición (A6)
   { id: "verde-oscuro", name: "Verde oscuro", hex: "#2F4A38" },
   { id: "verde-claro", name: "Verde claro", hex: "#9FC48C" },
   { id: "oliva", name: "Oliva", hex: "#7C7A4A" },
@@ -72,13 +72,13 @@ const COVERS_REFILL_A6 = [ // Reposición (A6) y "Outro refil extra" A6 en ambos
   { id: "marron", name: "Marrón", hex: "#6B4530" },
 ];
 
-const COVERS_REFILL_EXTRA = [ // "Refil extra" del personalizador (A5 y A6): mismos 4 colores, igual que las fotos
+const COVERS_REFILL_EXTRA = [ // "Refil extra" (A5 y A6) del personalizador y de la colección lista: mismos 4 colores, igual que las fotos
   { id: "lila", name: "Lila", hex: "#D5C3E6" },
   { id: "negro", name: "Negro", hex: "#201C19" },
   { id: "azul-marino", name: "Azul marino", hex: "#3F4F72" },
   { id: "rojo", name: "Rojo", hex: "#DE3933" },
 ];
-// Fotos del refil extra del personalizador: la primera es la Lila. Ya vienen
+// Fotos del refil extra: la primera es la Lila. Ya vienen
 // encuadradas en 3:4 (600x800) para que no se corten en el carrusel.
 const REFILL_EXTRA_PHOTOS = [
   "assets/img/refil-extra-lila.jpg",
@@ -141,20 +141,18 @@ const PRESETS = [
   { id: "aura", name: "Aura", copy: "Intenso y sofisticado, con un toque de personalidad.", desc: "Cuero marsala · elástico rosa bebé · dije de cisne · 2 cuadernos Priori · pauta lisa", leather: "marsala", elastic: "rosa-bebe", photos: ["assets/img/aura-1.jpg", "assets/img/aura-2.jpg", "assets/img/modelos-caderno-preto.jpg"] },
 ];
 
-// Refil extra: 3 productos con cantidad seleccionable, precio distinto según el
-// flujo (colección lista vs. personalizado desde cero) — así lo pidió la clienta.
+// Refil extra: un solo cuaderno de repuesto, en A5 y en A6, con cantidad seleccionable.
+// Los ids son nuevos a propósito, así un estado guardado con los ids anteriores no
+// apunta a colores que ya no existen. La colección lista (preset) y el personalizador
+// (custom) tienen hoy los mismos productos y precios; si la clienta pide precios
+// distintos según el flujo, alcanza con separar las dos listas.
+const REFILL_EXTRA_ITEMS = [
+  { id: "refil-a5", name: "Refil extra (A5)", unitPrice: 7000, size: "A5", colors: COVERS_REFILL_EXTRA, pautaOptions: PAUTAS_REFILL, photos: REFILL_EXTRA_PHOTOS },
+  { id: "refil-a6", name: "Refil extra (A6)", unitPrice: 6000, size: "A6", colors: COVERS_REFILL_EXTRA, pautaOptions: PAUTAS_REFILL, photos: REFILL_EXTRA_PHOTOS },
+];
 const REFILL_EXTRAS = {
-  preset: [
-    { id: "rajado-a5", name: "Refil Extra - Soft Living Collection (A5)", unitPrice: 7000, size: "A5", colors: COVERS_REFILL_A5, pauta: "rayada", photos: ["assets/img/soft-living-1.jpg", "assets/img/soft-living-2.jpg", "assets/img/soft-living-3.jpg", "assets/img/soft-living-4.jpg", "assets/img/soft-living-5.jpg", "assets/img/soft-living-6.jpg"] },
-    { id: "liso-a5-dorado", name: "Refil extra - Signature Colletion (A5)", unitPrice: 7000, size: "A5", fixedColorLabel: "Negro con detalle en dorado exclusivo de la marca.", pautaOptions: PAUTAS_REFILL, photos: ["assets/img/signature-collection-1.jpg"] },
-    { id: "a6", name: "Refil extra (A6)", unitPrice: 6000, size: "A6", colors: COVERS_REFILL_A6, pautaOptions: PAUTAS_REFILL, photos: ["assets/img/refil-a6-1.jpg"] },
-  ],
-  // personalizador: un solo cuaderno de repuesto, en A5 y en A6 (los ids son nuevos a
-  // propósito, así un estado guardado con los ids anteriores no apunta a colores que ya no existen).
-  custom: [
-    { id: "refil-a5", name: "Refil extra (A5)", unitPrice: 7000, size: "A5", colors: COVERS_REFILL_EXTRA, pautaOptions: PAUTAS_REFILL, photos: REFILL_EXTRA_PHOTOS },
-    { id: "refil-a6", name: "Refil extra (A6)", unitPrice: 6000, size: "A6", colors: COVERS_REFILL_EXTRA, pautaOptions: PAUTAS_REFILL, photos: REFILL_EXTRA_PHOTOS },
-  ],
+  preset: REFILL_EXTRA_ITEMS,
+  custom: REFILL_EXTRA_ITEMS,
 };
 
 function byId(list, id) { return list.find(x => x.id === id); }
